@@ -6,8 +6,29 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import frc.robot.commands.DriveRobot;
+import frc.robot.subsystems.Drive;
 
 public class RobotContainer {
+  
+  /*
+   * **************
+   * * SUBSYSTEMS *
+   * **************
+   */
+
+  /** Singleton instance of {@link Drive} for the whole robot. */
+  public static Drive drive = new Drive();
+    
+  /*
+   * ************
+   * * COMMANDS *
+   * ************
+   */
+
+    /** Singleton instance of {@link DriveRobot} for the whole robot */
+    public static DriveRobot driveRobot = new DriveRobot();
+  
   public RobotContainer() {
     configureBindings();
   }
