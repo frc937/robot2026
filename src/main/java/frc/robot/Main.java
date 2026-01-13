@@ -11,9 +11,6 @@ public final class Main {
 
   public static void main(String... args) {
     RobotBase.startRobot(Robot::new);
-    // i named my repository Emmet-Test-brunch
-
-    System.out.println("yum");
   }
 }
 
