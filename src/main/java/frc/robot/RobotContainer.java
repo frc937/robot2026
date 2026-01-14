@@ -6,9 +6,9 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
-import frc.robot.commands.DriveRobot;
 import frc.robot.subsystems.Drive;
 
+/** Singleton class that contains all the robot's subsystems, commands, and button bindings. */
 public class RobotContainer {
   
   /*
@@ -26,16 +26,22 @@ public class RobotContainer {
    * ************
    */
 
-    /** Singleton instance of {@link DriveRobot} for the whole robot */
-    public static DriveRobot driveRobot = new DriveRobot();
   
-  public RobotContainer() {
-    configureBindings();
-  }
 
-  private void configureBindings() {}
+    /** Constructor for {@link RobotContainer} */
+    public RobotContainer() {
+        configureBindings();
+    }
 
-  public Command getAutonomousCommand() {
-    return Commands.print("No autonomous command configured");
-  }
+    private void configureBindings() {}
+
+
+  /**
+   * Gets the current autonomous command.
+   *
+   * @return The current autonomous command.
+   */
+    public Command getAutonomousCommand() {
+        return Commands.print("No autonomous command configured");
+    }
 }
