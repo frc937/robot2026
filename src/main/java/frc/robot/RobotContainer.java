@@ -17,6 +17,9 @@ public class RobotContainer {
    * **************
    */
 
+  /* We declare all subsystems as public static because we don't dependency inject.*/
+
+  
   /** Singleton instance of {@link Drive} for the whole robot. */
   public static Drive drive = new Drive();
     
@@ -27,6 +30,12 @@ public class RobotContainer {
    */
 
   
+
+  /*
+   * ***********************
+   * * OTHER INSTANCE VARS *
+   * ***********************
+   */
 
     /** Constructor for {@link RobotContainer} */
     public RobotContainer() {
