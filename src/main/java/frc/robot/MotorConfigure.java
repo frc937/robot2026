@@ -28,8 +28,8 @@ public final class MotorConfigure {
     public static void initShooterMotors(SparkMax leadingMotor) {
         SparkMaxConfig generalShooterConfig = 
             configureGeneralConfig(
-                Constants.SHOOTER_MOTOR_IDLE_MODE, 
-                Constants.SHOOTER_MOTOR_CURRENT_LIMIT);
+                Constants.Shooter.SHOOTER_MOTOR_IDLE_MODE, 
+                Constants.Shooter.SHOOTER_MOTOR_CURRENT_LIMIT);
 
         leadingMotorConfig = new SparkMaxConfig().apply(generalShooterConfig);
 
