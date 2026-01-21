@@ -4,6 +4,9 @@
 
 package frc.robot;
 
+import com.revrobotics.PersistMode;
+import com.revrobotics.ResetMode;
+import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 
@@ -21,5 +24,19 @@ public final class MotorConfigure {
         generalConfig.smartCurrentLimit(motorCurrentLimit);
         return generalConfig;
     }
+
+    public static void initShooterMotors(SparkMax leadingMotor) {
+        SparkMaxConfig generalShooterConfig = 
+            configureGeneralConfig(
+                Constants.SHOOTER_MOTOR_IDLE_MODE, 
+                Constants.SHOOTER_MOTOR_CURRENT_LIMIT);
+
+        leadingMotorConfig = new SparkMaxConfig().apply(generalShooterConfig);
+
+        leadingMotor.configure(generalShooterConfig, 
+            ResetMode.kResetSafeParameters, 
+            PersistMode.kNoPersistParameters);
+    }
+
 }
 
