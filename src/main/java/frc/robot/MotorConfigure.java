@@ -10,6 +10,8 @@ import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 
+import frc.robot.Constants.ShooterConstants;
+
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 
 /** Add your docs here. */
@@ -28,8 +30,8 @@ public final class MotorConfigure {
     public static void initShooterMotors(SparkMax leadingMotor) {
         SparkMaxConfig generalShooterConfig = 
             configureGeneralConfig(
-                Constants.Shooter.SHOOTER_MOTOR_IDLE_MODE, 
-                Constants.Shooter.SHOOTER_MOTOR_CURRENT_LIMIT);
+                ShooterConstants.SHOOTER_MOTOR_IDLE_MODE, 
+                ShooterConstants.SHOOTER_MOTOR_CURRENT_LIMIT);
 
         leadingMotorConfig = new SparkMaxConfig().apply(generalShooterConfig);
 

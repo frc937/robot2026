@@ -8,7 +8,7 @@ import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
+import frc.robot.Constants.ShooterConstants;
 import frc.robot.MotorConfigure;
 
 public class Shooter extends SubsystemBase {
@@ -16,17 +16,17 @@ public class Shooter extends SubsystemBase {
   private SparkMax shooterMotor;
   /** Creates a new Shooter. */
   public Shooter() {
-    this.shooterMotor = new SparkMax(Constants.Shooter.SHOOTER_MOTOR_ID , MotorType.kBrushed);
+    this.shooterMotor = new SparkMax(ShooterConstants.SHOOTER_MOTOR_ID , MotorType.kBrushed);
 
     MotorConfigure.initShooterMotors(shooterMotor);
   }
 
   public void runShooter() {
-    shooterMotor.set(Constants.Shooter.SHOOTER_MOTOR_SPEED);
+    shooterMotor.set(ShooterConstants.SHOOTER_MOTOR_SPEED);
   }
 
   public void runShooterReverse() {
-    shooterMotor.set(-Constants.Shooter.SHOOTER_MOTOR_SPEED);
+    shooterMotor.set(-ShooterConstants.SHOOTER_MOTOR_SPEED);
   }
 
   public void stop() {
