@@ -9,18 +9,18 @@ import frc.robot.RobotContainer;
 import frc.robot.subsystem.Shooter;
 
 /** Command for running the rollers on the Intake */
-public class RunShooter extends Command {
+public class RunShooterReverse extends Command {
   private Shooter shooter;
 
-  /** Creates a new RunShooter. */
-  public RunShooter() {
+  /** Creates a new RunShooterReverse. */
+  public RunShooterReverse() {
     this.shooter = RobotContainer.shooter;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    this.shooter.runShooter();
+    this.shooter.runShooterReverse();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
