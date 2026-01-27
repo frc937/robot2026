@@ -9,6 +9,17 @@ import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 /** Add your docs here. */
 public final class Constants {
 
+    /** Constants that are relating to the controllers. */
+    public static final class Controllers {
+        /** Driver station port number for the pilot controller */
+        public static final int PILOT_CONTROLLER_PORT = 0;
+
+        /** Driver station port number for the operator controller */
+        public static final int OPERATOR_CONTROLLER_PORT = 2;
+        
+    }
+
+
     public static final class ShooterConstants {    
         
         public static final IdleMode SHOOTER_MOTOR_IDLE_MODE = IdleMode.kBrake;

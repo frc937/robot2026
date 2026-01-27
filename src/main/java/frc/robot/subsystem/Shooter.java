@@ -7,6 +7,7 @@ package frc.robot.subsystem;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ShooterConstants;
 import frc.robot.MotorConfigure;
@@ -14,11 +15,23 @@ import frc.robot.MotorConfigure;
 public class Shooter extends SubsystemBase {
   
   private SparkMax shooterMotor;
+  private DigitalInput limitSwitch;
+  
   /** Creates a new Shooter. */
   public Shooter() {
     this.shooterMotor = new SparkMax(ShooterConstants.SHOOTER_MOTOR_ID , MotorType.kBrushed);
 
     MotorConfigure.initShooterMotors(shooterMotor);
+  }
+
+  /**
+     * Returns a boolean value on whether or not the limit switch (for the intake) is activated
+     *
+     * @return status of the limit switch
+     */
+  public boolean getLimitSwitch() {
+
+    return !limitSwitch.get();
   }
 
   public void runShooter() {
