@@ -12,7 +12,6 @@ import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 
 import frc.robot.Constants.ShooterConstants;
 
-import edu.wpi.first.wpilibj.motorcontrol.Spark;
 
 /** Add your docs here. */
 public final class MotorConfigure {
@@ -33,7 +32,7 @@ public final class MotorConfigure {
                 ShooterConstants.SHOOTER_MOTOR_IDLE_MODE, 
                 ShooterConstants.SHOOTER_MOTOR_CURRENT_LIMIT);
 
-        leadingMotorConfig = new SparkMaxConfig().apply(generalShooterConfig);
+        leadingMotorConfig = new SparkMaxConfig().apply(leadingMotorConfig);
 
         leadingMotor.configure(generalShooterConfig, 
             ResetMode.kResetSafeParameters, 
