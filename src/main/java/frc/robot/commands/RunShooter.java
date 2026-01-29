@@ -5,7 +5,6 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.RobotContainer;
 import frc.robot.subsystem.Shooter;
 
 /** Command for running the rollers on the Intake */
@@ -13,8 +12,8 @@ public class RunShooter extends Command {
   private Shooter shooter;
 
   /** Creates a new RunShooter. */
-  public RunShooter() {
-    this.shooter = RobotContainer.shooter;
+  public RunShooter(Shooter shooter) {
+    this.shooter = shooter;
   }
 
   // Called when the command is initially scheduled.
@@ -37,6 +36,6 @@ public class RunShooter extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return shooter.getLimitSwitch();
+    return false;
   }
 }
