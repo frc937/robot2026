@@ -7,6 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import frc.robot.Constants.Controllers;
 import frc.robot.commands.RunShooter;
 import frc.robot.commands.RunShooterReverse;
 import frc.robot.subsystem.Shooter;
@@ -40,8 +41,14 @@ public class RobotContainer {
   public RobotContainer() {
     configureBindings();
   }
+  public static CommandXboxController pilotController = new CommandXboxController(Controllers.PILOT_CONTROLLER_PORT);
 
-  private void configureBindings() {}
+  public static CommandXboxController operatorController = new CommandXboxController(Controllers.OPERATOR_CONTROLLER_PORT);
+  private void configureBindings() {
+    operatorController.leftBumper().whileTrue(runShooter);
+    operatorController.rightBumper().whileTrue(runShooterReverse);
+
+  }
 
   public Command getAutonomousCommand() {
     return Commands.print("No autonomous command configured");
