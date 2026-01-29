@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.RunShooter;
+import frc.robot.commands.RunShooterReverse;
 import frc.robot.subsystem.Shooter;
 
 public class RobotContainer {
@@ -28,8 +29,9 @@ public class RobotContainer {
    */
 
    /** Singleton instance of the {@link RunShooter} for the whole robot */
-   public static RunShooter runShooter = new RunShooter();
+   public static RunShooter runShooter = new RunShooter(shooter);
 
+   public static RunShooterReverse runShooterReverse = new RunShooterReverse(shooter);
   /*
    * ***********************
    * * OTHER INSTANCE VARS *
