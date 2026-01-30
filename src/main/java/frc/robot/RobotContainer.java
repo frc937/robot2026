@@ -4,12 +4,16 @@
 
 package frc.robot;
 
+import java.io.File;
+
+import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.Controllers;
 import frc.robot.commands.RunShooter;
 import frc.robot.commands.RunShooterReverse;
+import frc.robot.subsystem.Drive;
 import frc.robot.subsystem.Shooter;
 
 public class RobotContainer {
@@ -22,6 +26,8 @@ public class RobotContainer {
   
    /** Singleton instance of the {@link Shooter} for the whole robot */
    public static Shooter shooter = new Shooter();
+
+   public static Drive drive = new Drive(new File(Filesystem.getDeployDirectory(), "swerve"));
 
   /*
    * ************
