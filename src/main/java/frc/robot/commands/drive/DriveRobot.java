@@ -4,10 +4,17 @@
 
 package frc.robot.commands.drive;
 
+import java.util.function.DoubleSupplier;
+
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystem.Drive;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class DriveRobot extends Command {
+
+  private final Drive swerve;
+  private final DoubleSupplier xTranslation, yTranslation;
+  private final DoubleSupplier headingHorizontal, headingVertical;
   /** Creates a new DriveRobot. */
   public DriveRobot() {
     // Use addRequirements() here to declare subsystem dependencies.
