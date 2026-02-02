@@ -6,7 +6,9 @@ package frc.robot.subsystem;
 
 import java.io.File;
 
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DriveConstants;
 import swervelib.SwerveDrive;
@@ -23,11 +25,50 @@ public class Drive extends SubsystemBase {
     } catch (Exception e) {
       e.printStackTrace();
     }
+
+    swerveDrive.setMotorIdleMode(true);
   }
 
   public void driveRobot(Translation2d translation, double rotation, boolean isFieldOriented) {
     swerveDrive.drive(translation, rotation, isFieldOriented, false);
   }
+
+  public void zeroGyro() {
+    swerveDrive.zeroGyro();
+  }
+
+  public double getMaxSpeed() {
+    return Math.min(swerveDrive.getMaximumChassisVelocity(), DriveConstants.MAX_SPEED);
+  }
+
+  public double getMaxAngularSpeed() {
+    return Math.min(swerveDrive.getMaximumChassisAngularVelocity(), DriveConstants.MAX_SPEED);
+  }
+
+  public void setHeadingCorrection(boolean enabled) {
+    swerveDrive.setHeadingCorrection(enabled);
+  }
+
+
+  public Rotation2d getHeading() {
+      return swerveDrive.getPose().getRotation();
+    }
+
+  
+  public ChassisSpeeds getTargetSpeeds(
+    double translationX, double translationY, double headingX, double headingY
+  ) {
+    return swerveDrive.swerveController.getTargetSpeeds(
+      translationX,
+      translationY,
+      headingX,
+      headingY,
+      getHeading().getRadians(),
+      getMaxSpeed()
+    );
+  }
+
+  
 
   public void lock() {
     swerveDrive.lockPose();
