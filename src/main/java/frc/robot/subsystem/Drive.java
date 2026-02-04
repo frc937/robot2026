@@ -33,6 +33,10 @@ public class Drive extends SubsystemBase {
     swerveDrive.drive(translation, rotation, isFieldOriented, false);
   }
 
+  public void stop() {
+    swerveDrive.drive(DriveConstants.EMPTY_TRANSLATION, 0, false, false);
+  }
+
   public void zeroGyro() {
     swerveDrive.zeroGyro();
   }

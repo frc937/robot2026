@@ -32,9 +32,9 @@ public final class MotorConfigure {
                 ShooterConstants.SHOOTER_MOTOR_IDLE_MODE, 
                 ShooterConstants.SHOOTER_MOTOR_CURRENT_LIMIT);
 
-        leadingMotorConfig = new SparkMaxConfig().apply(leadingMotorConfig);
+        leadingMotorConfig = new SparkMaxConfig().apply(generalShooterConfig);
 
-        leadingMotor.configure(generalShooterConfig, 
+        leadingMotor.configure(leadingMotorConfig, 
             ResetMode.kResetSafeParameters, 
             PersistMode.kNoPersistParameters);
     }

@@ -6,6 +6,7 @@ package frc.robot;
 
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.util.Units;
 
 /** Add your docs here. */
@@ -28,13 +29,14 @@ public final class Constants {
 
         public static final int SHOOTER_MOTOR_CURRENT_LIMIT = 0; /* Change 0 to something */
     
-        public static final int SHOOTER_MOTOR_ID = 0; /* Change 0 to something */
+        public static final int SHOOTER_MOTOR_ID = 13; /* Change 0 to something */
 
         public static final double SHOOTER_MOTOR_SPEED = 0.5;
     }
 
     public static final class DriveConstants {
         public static final Double MAX_SPEED = Units.feetToMeters(14.5);
+        public static final Translation2d EMPTY_TRANSLATION = new Translation2d();
 
         
     }
