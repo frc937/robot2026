@@ -38,7 +38,7 @@ public class RobotContainer {
    /**Singleton instance of the Driver controller for the whole robot. */
   public static CommandXboxController pilotController = new CommandXboxController(Controllers.PILOT_CONTROLLER_PORT);
 
-   /**Singleton nstance of the Operator controller for the whole robot. */
+   /**Singleton instance of the Operator controller for the whole robot. */
   public static CommandXboxController operatorController = new CommandXboxController(Controllers.OPERATOR_CONTROLLER_PORT);
    /** Constructer for the {@link RobotContainer} */
   public RobotContainer() {
@@ -50,7 +50,7 @@ public class RobotContainer {
     operatorController.rightBumper().whileTrue(Commands.runOnce(shooter::runShooter, shooter));
 
   }
-/**Get the current autonamus coomand.
+/**Get the current autonomus command.
  * 
  * @return The current autonomus command.
  */
