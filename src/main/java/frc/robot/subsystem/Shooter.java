@@ -16,6 +16,7 @@ public class Shooter extends SubsystemBase {
   
   private SparkMax frontMotor;
   private SparkMax backMotor;
+  
   /** Constructor for the Shooter subsystem. */
   public Shooter() {
     this.frontMotor = new SparkMax(ShooterConstants.FRONT_MOTOR_ID , MotorType.kBrushed);

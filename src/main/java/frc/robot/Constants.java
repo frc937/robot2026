@@ -11,27 +11,31 @@ public final class Constants {
 
     /** Constants that are relating to the controllers. */
     public static final class Controllers {
-        /** Driver station port number for the pilot controller */
+
+        /** Driver station port number for the pilot controller. */
         public static final int PILOT_CONTROLLER_PORT = 0;
 
-        /** Driver station port number for the operator controller */
+        /** Driver station port number for the operator controller. */
         public static final int OPERATOR_CONTROLLER_PORT = 2;
         
     }
 
-    /** Constants relating to the Shooting system. */
+    /** Constants relating to the Shooting system. 
+     * 
+     * TODO Set motor can IDs
+    */
     public static final class ShooterConstants {    
 
-        /** Idle mode for the Shooter motors */
+        /** Idle mode for the Shooter motors. */
         public static final IdleMode MOTOR_IDLE_MODE = IdleMode.kBrake;
 
-        /** Current limit for the Shooter motors */
-        public static final int MOTOR_CURRENT_LIMIT = 0; /* Change 0 to something */
+        /** Current limit for the Shooter motors. */
+        public static final int MOTOR_CURRENT_LIMIT = 0;
     
-        /** CAN ID for the Shooter systems front motor */
-        public static final int FRONT_MOTOR_ID = 0; /* Change 0 to something */
+        /** CAN ID for the Shooter systems front motor. */
+        public static final int FRONT_MOTOR_ID = 0;
 
-        /** CAN ID for the Shooter systems back motor */
+        /** CAN ID for the Shooter systems back motor. */
         public static final int BACK_MOTOR_ID = 0;
 
         /** Motor speed for the Shooter system. */
