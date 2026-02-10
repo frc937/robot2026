@@ -6,7 +6,7 @@ package frc.robot;
 
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 
-/** Add your docs here. */
+/** Constants for the entire robot. */
 public final class Constants {
 
     /** Constants that are relating to the controllers. */

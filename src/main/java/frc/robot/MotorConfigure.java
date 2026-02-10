@@ -13,7 +13,7 @@ import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import frc.robot.Constants.ShooterConstants;
 
 
-/** Add your docs here. */
+/** Utility class for configuring SparkMax motors. */
 public final class MotorConfigure {
 
     private static SparkMaxConfig leadingMotorConfig;
@@ -26,7 +26,12 @@ public final class MotorConfigure {
         return generalConfig;
     }
 
-    public static void initShooterMotors(SparkMax leadingMotor, SparkMax followingMotor) {
+    /** Configures the passed in motors.
+     * 
+     * @param frontMotor Motor at the front of the shooter.
+     * @param backMotor Motor at the back of the shooter.
+     */
+    public static void initShooterMotors(SparkMax frontMotor, SparkMax backMotor) {
         SparkMaxConfig generalShooterConfig = 
             configureGeneralConfig(
                 ShooterConstants.MOTOR_IDLE_MODE, 
@@ -35,11 +40,11 @@ public final class MotorConfigure {
         leadingMotorConfig = new SparkMaxConfig().apply(generalShooterConfig);
         followingMotorConfig = new SparkMaxConfig().apply(generalShooterConfig);
     
-        leadingMotor.configure(leadingMotorConfig, 
+        frontMotor.configure(leadingMotorConfig, 
             ResetMode.kResetSafeParameters, 
             PersistMode.kNoPersistParameters);
 
-        followingMotor.configure(followingMotorConfig,
+        backMotor.configure(followingMotorConfig,
          ResetMode.kResetSafeParameters,
          PersistMode.kNoPersistParameters); 
     }

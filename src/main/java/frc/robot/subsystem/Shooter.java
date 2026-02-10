@@ -11,11 +11,12 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ShooterConstants;
 import frc.robot.MotorConfigure;
 
+/** Subsystem for the Shooter. */
 public class Shooter extends SubsystemBase {
   
   private SparkMax frontMotor;
   private SparkMax backMotor;
-  /** Creates a new Shooter. */
+  /** Constructor for the Shooter subsystem. */
   public Shooter() {
     this.frontMotor = new SparkMax(ShooterConstants.FRONT_MOTOR_ID , MotorType.kBrushed);
     this.backMotor = new SparkMax(ShooterConstants.BACK_MOTOR_ID, MotorType.kBrushed);
@@ -23,19 +24,16 @@ public class Shooter extends SubsystemBase {
     MotorConfigure.initShooterMotors(frontMotor, backMotor);
   }
 
+  /** Runs the Shooter. */
   public void runShooter() {
     frontMotor.set(ShooterConstants.MOTOR_SPEED);
     backMotor.set(-ShooterConstants.MOTOR_SPEED);
   }
 
+  /** Runs the Intake. */
   public void runIntake() {
     frontMotor.set(ShooterConstants.MOTOR_SPEED);
     backMotor.set(ShooterConstants.MOTOR_SPEED);
-  }
-
-  public void stop() {
-    frontMotor.set(0);
-    backMotor.set(0);
   }
   
   @Override
