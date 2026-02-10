@@ -11,6 +11,7 @@ import frc.robot.Constants.Controllers;
 
 import frc.robot.subsystem.Shooter;
 
+/** Singleton class that contains all the robot subsystems, commands, and button bindings. */
 public class RobotContainer {
   
   /*
@@ -33,11 +34,16 @@ public class RobotContainer {
    * * OTHER INSTANCE VARS *
    * ***********************
    */
+
+  /** Construcker for the {@link Shooter} */
   public RobotContainer() {
     configureBindings();
   }
+
+  /** Singleton instance of the Driver controller for the whole robot. */
   public static CommandXboxController pilotController = new CommandXboxController(Controllers.PILOT_CONTROLLER_PORT);
 
+  /** Singleton instance of the Operator controller for the whole robot. */
   public static CommandXboxController operatorController = new CommandXboxController(Controllers.OPERATOR_CONTROLLER_PORT);
   private void configureBindings() {
     operatorController.leftBumper().whileTrue(Commands.runOnce(shooter::runIntake, shooter));
@@ -45,6 +51,11 @@ public class RobotContainer {
 
   }
 
+
+  /** Gets the current Autonomous command.
+   * 
+   * @return the current autonomous command.
+   */
   public Command getAutonomousCommand() {
     return Commands.print("No autonomous command configured");
   }
