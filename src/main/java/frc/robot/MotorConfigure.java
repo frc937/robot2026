@@ -26,17 +26,22 @@ public final class MotorConfigure {
         return generalConfig;
     }
 
-    public static void initShooterMotors(SparkMax leadingMotor) {
+    public static void initShooterMotors(SparkMax leadingMotor, SparkMax followingMotor) {
         SparkMaxConfig generalShooterConfig = 
             configureGeneralConfig(
-                ShooterConstants.SHOOTER_MOTOR_IDLE_MODE, 
-                ShooterConstants.SHOOTER_MOTOR_CURRENT_LIMIT);
+                ShooterConstants.MOTOR_IDLE_MODE, 
+                ShooterConstants.MOTOR_CURRENT_LIMIT);
 
-        leadingMotorConfig = new SparkMaxConfig().apply(leadingMotorConfig);
-
-        leadingMotor.configure(generalShooterConfig, 
+        leadingMotorConfig = new SparkMaxConfig().apply(generalShooterConfig);
+        followingMotorConfig = new SparkMaxConfig().apply(generalShooterConfig);
+    
+        leadingMotor.configure(leadingMotorConfig, 
             ResetMode.kResetSafeParameters, 
             PersistMode.kNoPersistParameters);
+
+        followingMotor.configure(followingMotorConfig,
+         ResetMode.kResetSafeParameters,
+         PersistMode.kNoPersistParameters); 
     }
 
 }

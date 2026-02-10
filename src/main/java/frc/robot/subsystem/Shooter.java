@@ -13,25 +13,29 @@ import frc.robot.MotorConfigure;
 
 public class Shooter extends SubsystemBase {
   
-  private SparkMax shooterMotor;
-  
+  private SparkMax frontMotor;
+  private SparkMax backMotor;
   /** Creates a new Shooter. */
   public Shooter() {
-    this.shooterMotor = new SparkMax(ShooterConstants.SHOOTER_MOTOR_ID , MotorType.kBrushed);
+    this.frontMotor = new SparkMax(ShooterConstants.FRONT_MOTOR_ID , MotorType.kBrushed);
+    this.backMotor = new SparkMax(ShooterConstants.BACK_MOTOR_ID, MotorType.kBrushed);
 
-    MotorConfigure.initShooterMotors(shooterMotor);
+    MotorConfigure.initShooterMotors(frontMotor, backMotor);
   }
 
   public void runShooter() {
-    shooterMotor.set(ShooterConstants.SHOOTER_MOTOR_SPEED);
+    frontMotor.set(ShooterConstants.MOTOR_SPEED);
+    backMotor.set(-ShooterConstants.MOTOR_SPEED);
   }
 
-  public void runShooterReverse() {
-    shooterMotor.set(-ShooterConstants.SHOOTER_MOTOR_SPEED);
+  public void runIntake() {
+    frontMotor.set(ShooterConstants.MOTOR_SPEED);
+    backMotor.set(ShooterConstants.MOTOR_SPEED);
   }
 
   public void stop() {
-    shooterMotor.set(0);
+    frontMotor.set(0);
+    backMotor.set(0);
   }
   
   @Override
