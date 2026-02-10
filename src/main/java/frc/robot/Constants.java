@@ -16,7 +16,7 @@ public final class Constants {
         public static final int PILOT_CONTROLLER_PORT = 0;
 
         /** Driver station port number for the operator controller. */
-        public static final int OPERATOR_CONTROLLER_PORT = 2;
+        public static final int OPERATOR_CONTROLLER_PORT = 1;
         
     }
 
