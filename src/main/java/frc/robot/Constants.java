@@ -46,7 +46,7 @@ public final class Constants {
         public static final double MOTOR_SPEED = 0.5;
     }
 
-    /** COnstants that relate to the Drive subsystem. */
+    /** Constants that relate to the Drive subsystem. */
     public static final class DriveConstants {
 
         /** Swerve drive maximum speed. */
