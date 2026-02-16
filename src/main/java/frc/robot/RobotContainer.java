@@ -4,23 +4,35 @@
 
 package frc.robot;
 
+import java.io.File;
+
+import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.Controllers;
-
+import frc.robot.subsystem.Drive;
 import frc.robot.subsystem.Shooter;
 
 /** Singleton class that contains all the robot's subsystems, commmands, and button bindings. */
 public class RobotContainer {
   
+
+
+
+
   /*
    * **************
    * * SUBSYSTEMS *
    * **************
    */
-  
-   /** Singleton instance of the {@link Shooter} for the whole robot */
+
+
+  /** SIngleton instance of the {@link Drive} for the whole robot. */
+  public static Drive drivebase = new Drive(new File(Filesystem.getDeployDirectory(), "swerve"));
+
+
+   /** Singleton instance of the {@link Shooter} for the whole robot. */
    public static Shooter shooter = new Shooter();
 
   /*
