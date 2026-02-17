@@ -21,13 +21,12 @@ public class DriveRobot extends Command {
   /**
    * Drives the robot.
    * 
-   * @param drivebase Required drive subsysyem.
+   * @param drivebase Required drive subsystem.
    * @param vX Joystick value for the X axis.
    * @param vY Joystick value for the Y axis.
    * @param heading Joystick value for the heading.
    */
   public DriveRobot(Drive drivebase, DoubleSupplier vX, DoubleSupplier vY, DoubleSupplier heading) {
-    // Use addRequirements() here to declare subsystem dependencies.
     this.drivebase = drivebase;
     this.vX = vX;
     this.vY = vY;
