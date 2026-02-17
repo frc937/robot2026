@@ -46,13 +46,13 @@ public class DriveRobot extends Command {
 
     ChassisSpeeds desiredSpeeds = drivebase.getTargetSpeeds(
       vX.getAsDouble(),
-       vY.getAsDouble(),
-        new Rotation2d(heading.getAsDouble() * Math.PI
-        ));
+      vY.getAsDouble(),
+      new Rotation2d(heading.getAsDouble() * Math.PI
+    ));
 
-        Translation2d translation = SwerveController.getTranslation2d(desiredSpeeds);
+    Translation2d translation = SwerveController.getTranslation2d(desiredSpeeds);
 
-        drivebase.drive(translation, desiredSpeeds.omegaRadiansPerSecond, true);
+    drivebase.drive(translation, desiredSpeeds.omegaRadiansPerSecond, true);
   }
 
   // Called once the command ends or is interrupted.
