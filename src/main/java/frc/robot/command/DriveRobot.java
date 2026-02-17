@@ -4,7 +4,6 @@
 
 package frc.robot.command;
 
-import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -17,7 +16,7 @@ import swervelib.SwerveController;
 public class DriveRobot extends Command {
 
   private final Drive drivebase;
-  private final DoubleSupplier vX, vY, heading;
+  private final Double vX, vY, heading;
   /**
    * Drives the robot.
    * 
@@ -26,7 +25,7 @@ public class DriveRobot extends Command {
    * @param vY Joystick value for the Y axis.
    * @param heading Joystick value for the heading.
    */
-  public DriveRobot(Drive drivebase, DoubleSupplier vX, DoubleSupplier vY, DoubleSupplier heading) {
+  public DriveRobot(Drive drivebase, Double vX, Double vY, Double heading) {
     this.drivebase = drivebase;
     this.vX = vX;
     this.vY = vY;
@@ -44,9 +43,9 @@ public class DriveRobot extends Command {
   public void execute() {
 
     ChassisSpeeds desiredSpeeds = drivebase.getTargetSpeeds(
-      vX.getAsDouble(),
-      vY.getAsDouble(),
-      new Rotation2d(heading.getAsDouble() * Math.PI
+      vX,
+      vY,
+      new Rotation2d(heading * Math.PI
     ));
 
     Translation2d translation = SwerveController.getTranslation2d(desiredSpeeds);

@@ -11,13 +11,19 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.Controllers;
+import frc.robot.command.DriveRobot;
 import frc.robot.subsystem.Drive;
 import frc.robot.subsystem.Shooter;
 
 /** Singleton class that contains all the robot's subsystems, commmands, and button bindings. */
 public class RobotContainer {
   
+   /**Singleton instance of the Driver controller for the whole robot. */
+  public static CommandXboxController pilotController = new CommandXboxController(Controllers.PILOT_CONTROLLER_PORT);
 
+   /**Singleton instance of the Operator controller for the whole robot. */
+  public static CommandXboxController operatorController = new CommandXboxController(Controllers.OPERATOR_CONTROLLER_PORT);
+   /** Constructer for the {@link RobotContainer} */
 
 
 
@@ -41,18 +47,19 @@ public class RobotContainer {
    * ************
    */
 
+   /** singleton instance of the {@link DriveRobot} command for the whole robot. */
+public static DriveRobot driveRobot= new DriveRobot(drivebase,
+ pilotController.getLeftX(),
+  pilotController.getLeftY(),
+   pilotController.getRightX());
+
   /*
    * ***********************
    * * OTHER INSTANCE VARS *
    * ***********************
    */
 
-   /**Singleton instance of the Driver controller for the whole robot. */
-  public static CommandXboxController pilotController = new CommandXboxController(Controllers.PILOT_CONTROLLER_PORT);
 
-   /**Singleton instance of the Operator controller for the whole robot. */
-  public static CommandXboxController operatorController = new CommandXboxController(Controllers.OPERATOR_CONTROLLER_PORT);
-   /** Constructer for the {@link RobotContainer} */
   public RobotContainer() {
     configureBindings();
   }
