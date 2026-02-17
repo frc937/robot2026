@@ -37,12 +37,12 @@ public static SwerveDrive swerveDrive;
 
 
 /**
- * Primairy meathod of controlling the drivebase.
+ * Primary meathod of controlling the drivebase.
  * 
  * @param translation {@link Translation2d} that is the commanded linear velocity of the robot, in meters per second. 
  *                    In field oriented, positive x is away from the alliance zone, and positive y is toward the left wall.
  * @param rotation Robot angular rate in radians per second. Counter Clockwise positive.
- * @param isFieldOriented Druve Mode.
+ * @param isFieldOriented Drive Mode.
  */
   public void drive(Translation2d translation, double rotation, boolean isFieldOriented) {
     swerveDrive.drive(translation, rotation, isFieldOriented, false);
@@ -51,7 +51,7 @@ public static SwerveDrive swerveDrive;
 
 
   /**
-   * Gets the creent position and rotations of the robot, reported by odimentary.
+   * Gets the creent position and rotations of the robot, reported by odometry.
    * @return The robot's pose.
    */
   public Pose2d getPose() {
