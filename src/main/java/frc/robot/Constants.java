@@ -34,13 +34,13 @@ public final class Constants {
         public static final IdleMode MOTOR_IDLE_MODE = IdleMode.kBrake;
 
         /** Current limit for the Shooter motors. */
-        public static final int MOTOR_CURRENT_LIMIT = 0;
+        public static final int MOTOR_CURRENT_LIMIT = 40;
     
         /** CAN ID for the Shooter systems front motor. */
-        public static final int FRONT_MOTOR_ID = 0;
+        public static final int FRONT_MOTOR_ID = 13;
 
         /** CAN ID for the Shooter systems back motor. */
-        public static final int BACK_MOTOR_ID = 0;
+        public static final int BACK_MOTOR_ID = 14;
 
         /** Motor speed for the Shooter system. */
         public static final double MOTOR_SPEED = 0.5;
