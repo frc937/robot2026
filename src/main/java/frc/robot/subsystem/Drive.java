@@ -6,10 +6,12 @@ package frc.robot.subsystem;
 
 import java.io.File;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DriveConstants;
 import swervelib.SwerveDrive;
@@ -68,6 +70,8 @@ public static SwerveDrive swerveDrive;
   }
 
 
+  
+
   /**
    * Get the chassis speeds based on controller input of one joystick and one angle. 
    * Control the robot at an offset of 90 degrees.
@@ -84,7 +88,7 @@ public static SwerveDrive swerveDrive;
       scaledInputs.getY(), 
       angle.getRadians(), 
       getHeading().getRadians(), 
-      DriveConstants.MAX_SPEED
+      Units.feetToMeters(14.5)
       );
 
   }

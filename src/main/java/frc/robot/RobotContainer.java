@@ -8,15 +8,12 @@ import java.io.File;
 
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.Controllers;
 import frc.robot.command.DriveRobot;
 import frc.robot.subsystem.Drive;
 import frc.robot.subsystem.Shooter;
-import swervelib.SwerveDrive;
-
 /** Singleton class that contains all the robot's subsystems, commmands, and button bindings. */
 public class RobotContainer {
   
@@ -50,10 +47,7 @@ public class RobotContainer {
    */
 
    /** singleton instance of the {@link DriveRobot} command for the whole robot. */
-public static DriveRobot driveRobot= new DriveRobot(drivebase,
- pilotController.getLeftX(),
-  pilotController.getLeftY(),
-   pilotController.getRightX());
+public static DriveRobot driveRobot= new DriveRobot(drivebase, pilotController);
 
   /*
    * ***********************
@@ -65,7 +59,7 @@ public static DriveRobot driveRobot= new DriveRobot(drivebase,
   public RobotContainer() {
     configureBindings();
 
-    CommandScheduler.getInstance().schedule(driveRobot);
+    drivebase.setDefaultCommand(driveRobot);
   }
   
   private void configureBindings() {

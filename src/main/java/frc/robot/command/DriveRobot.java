@@ -5,10 +5,13 @@
 package frc.robot.command;
 
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import frc.robot.Constants.DriveConstants;
 import frc.robot.subsystem.Drive;
 import swervelib.SwerveController;
 
@@ -16,22 +19,24 @@ import swervelib.SwerveController;
 public class DriveRobot extends Command {
 
   private final Drive drivebase;
-  private final Double vX, vY, heading;
+  private final CommandXboxController drivingController;
   /**
    * Drives the robot.
    * 
    * @param drivebase Required drive subsystem.
-   * @param vX Joystick value for the X axis.
-   * @param vY Joystick value for the Y axis.
-   * @param heading Joystick value for the heading.
+   * @param pilotController
    */
-  public DriveRobot(Drive drivebase, Double vX, Double vY, Double heading) {
+  public DriveRobot(Drive drivebase, CommandXboxController drivingController) {
     this.drivebase = drivebase;
-    this.vX = vX;
-    this.vY = vY;
-    this.heading = heading;
+    this.drivingController = drivingController;
 
     addRequirements(drivebase);
+  }
+
+
+  private double getDeadbandedAxis(double axis) {
+    return MathUtil.applyDeadband(axis, 0.1);
+
   }
 
   // Called when the command is initially scheduled.
@@ -42,15 +47,21 @@ public class DriveRobot extends Command {
   @Override
   public void execute() {
 
+    System.out.println(getDeadbandedAxis(drivingController.getLeftX()) + " " + getDeadbandedAxis(drivingController.getLeftY()) + " " + getDeadbandedAxis(drivingController.getRightX()));
+
     ChassisSpeeds desiredSpeeds = drivebase.getTargetSpeeds(
-      vX,
-      vY,
-      new Rotation2d(heading * Math.PI
+      getDeadbandedAxis(drivingController.getLeftX()) * DriveConstants.MAX_SPEED,
+      getDeadbandedAxis(drivingController.getLeftY()) * DriveConstants.MAX_SPEED,
+      new Rotation2d(getDeadbandedAxis(drivingController.getRightX()) * DriveConstants.MAX_ANGULAR_SPEED * Math.PI
     ));
 
-    Translation2d translation = SwerveController.getTranslation2d(desiredSpeeds);
+    Translation2d translation = new Translation2d(
+      getDeadbandedAxis(drivingController.getLeftX()) * DriveConstants.MAX_SPEED,
+      getDeadbandedAxis(drivingController.getLeftY()) * DriveConstants.MAX_SPEED);
 
-    drivebase.drive(translation, desiredSpeeds.omegaRadiansPerSecond, true);
+    double heading = getDeadbandedAxis(drivingController.getRightX()) * DriveConstants.MAX_ANGULAR_SPEED;
+
+    drivebase.drive(translation, heading, false);
   }
 
   // Called once the command ends or is interrupted.
