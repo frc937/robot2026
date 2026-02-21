@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.subsystem.Drive;
 import swervelib.SwerveController;
+import swervelib.SwerveInputStream;
 
 /** Drives the robot. */
 public class DriveRobot extends Command {
@@ -47,20 +48,20 @@ public class DriveRobot extends Command {
   @Override
   public void execute() {
 
-    System.out.println(getDeadbandedAxis(drivingController.getLeftX()) + " " + getDeadbandedAxis(drivingController.getLeftY()) + " " + getDeadbandedAxis(drivingController.getRightX()));
 
-    ChassisSpeeds desiredSpeeds = drivebase.getTargetSpeeds(
-      getDeadbandedAxis(drivingController.getLeftX()) * DriveConstants.MAX_SPEED,
-      getDeadbandedAxis(drivingController.getLeftY()) * DriveConstants.MAX_SPEED,
-      new Rotation2d(getDeadbandedAxis(drivingController.getRightX()) * DriveConstants.MAX_ANGULAR_SPEED * Math.PI
-    ));
+    double xInput = Math.pow(getDeadbandedAxis(drivingController.getLeftX()), 2)  * Math.signum(drivingController.getLeftX());
+    double yInput = Math.pow(getDeadbandedAxis(drivingController.getLeftY()), 2)  * Math.signum(drivingController.getLeftY());
+    double headingXInput = Math.pow(getDeadbandedAxis(drivingController.getRightX()), 2)  * Math.signum(drivingController.getRightX());
+    System.out.println(" x" + xInput + " y" + yInput + " Hx" + headingXInput);
+
 
     Translation2d translation = new Translation2d(
-      getDeadbandedAxis(drivingController.getLeftX()) * DriveConstants.MAX_SPEED,
-      getDeadbandedAxis(drivingController.getLeftY()) * DriveConstants.MAX_SPEED);
+      xInput * DriveConstants.MAX_SPEED,
+      yInput * DriveConstants.MAX_SPEED);
 
-    double heading = getDeadbandedAxis(drivingController.getRightX()) * DriveConstants.MAX_ANGULAR_SPEED;
+    double heading = headingXInput * DriveConstants.MAX_ANGULAR_SPEED;
 
+  
     drivebase.drive(translation, heading, false);
   }
 

@@ -5,6 +5,7 @@
 package frc.robot.subsystem;
 
 import java.io.File;
+import java.util.function.Supplier;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -12,9 +13,12 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.units.Unit;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DriveConstants;
 import swervelib.SwerveDrive;
+import swervelib.SwerveInputStream;
 import swervelib.math.SwerveMath;
 import swervelib.parser.SwerveParser;
 
@@ -29,12 +33,13 @@ public static SwerveDrive swerveDrive;
    */
   public Drive(File directory) {
     try {
-      swerveDrive = new SwerveParser(directory).createSwerveDrive(DriveConstants.MAX_SPEED);
+      swerveDrive = new SwerveParser(directory).createSwerveDrive(Units.feetToMeters(14.5));
     } catch (Exception e) {
       throw new RuntimeException(e);
     }
 
     swerveDrive.setHeadingCorrection(false);
+    swerveDrive.setAngularVelocityCompensation(true, true, 0.1);
   }
 
 
@@ -48,6 +53,10 @@ public static SwerveDrive swerveDrive;
  */
   public void drive(Translation2d translation, double rotation, boolean isFieldOriented) {
     swerveDrive.drive(translation, rotation, isFieldOriented, false);
+  }
+
+  public Command drive(Supplier<ChassisSpeeds> inputStream) {
+    return run(() -> swerveDrive.drive(inputStream.get()));
   }
 
 
@@ -91,6 +100,10 @@ public static SwerveDrive swerveDrive;
       Units.feetToMeters(14.5)
       );
 
+  }
+
+  public SwerveDrive getSwerveDrive() {
+    return swerveDrive;
   }
 
   @Override
