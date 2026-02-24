@@ -26,7 +26,6 @@ public final class Constants {
 
     /** Constants relating to the Shooting system. 
      * 
-     * TODO Set motor can IDs
     */
     public static final class ShooterConstants {    
 
