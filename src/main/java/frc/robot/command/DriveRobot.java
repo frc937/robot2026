@@ -51,8 +51,9 @@ public class DriveRobot extends Command {
 
     double xInput = Math.pow(getDeadbandedAxis(drivingController.getLeftX()), 2)  * Math.signum(drivingController.getLeftX());
     double yInput = Math.pow(getDeadbandedAxis(drivingController.getLeftY()), 2)  * Math.signum(drivingController.getLeftY());
-    double headingXInput = Math.pow(getDeadbandedAxis(drivingController.getRightX()), 2)  * Math.signum(drivingController.getRightX());
-    System.out.println(" x" + xInput + " y" + yInput + " Hx" + headingXInput);
+    double headingXInput = 
+    Math.pow(getDeadbandedAxis(drivingController.getRightX()), 2)  * Math.signum(drivingController.getRightX());
+    //System.out.println(" x" + xInput + " y" + yInput + " Hx" + headingXInput);
 
 
     Translation2d translation = new Translation2d(

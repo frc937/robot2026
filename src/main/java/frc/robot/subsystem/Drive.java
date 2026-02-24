@@ -21,6 +21,8 @@ import swervelib.SwerveDrive;
 import swervelib.SwerveInputStream;
 import swervelib.math.SwerveMath;
 import swervelib.parser.SwerveParser;
+import swervelib.telemetry.SwerveDriveTelemetry;
+import swervelib.telemetry.SwerveDriveTelemetry.TelemetryVerbosity;
 
 public class Drive extends SubsystemBase {
 
@@ -32,6 +34,8 @@ public static SwerveDrive swerveDrive;
    * @param directory Directory of the swerve drive files.
    */
   public Drive(File directory) {
+    SwerveDriveTelemetry.verbosity = TelemetryVerbosity.HIGH;
+
     try {
       swerveDrive = new SwerveParser(directory).createSwerveDrive(Units.feetToMeters(14.5));
     } catch (Exception e) {
@@ -53,6 +57,8 @@ public static SwerveDrive swerveDrive;
  */
   public void drive(Translation2d translation, double rotation, boolean isFieldOriented) {
     swerveDrive.drive(translation, rotation, isFieldOriented, false);
+    System.out.println(swerveDrive.getRobotVelocity());
+    
   }
 
   public Command drive(Supplier<ChassisSpeeds> inputStream) {
