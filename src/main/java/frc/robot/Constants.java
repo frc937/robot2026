@@ -7,6 +7,7 @@ package frc.robot;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.units.Unit;
 
 
 
@@ -49,7 +50,7 @@ public final class Constants {
     public static final class DriveConstants {
 
         /** Swerve drive maximum speed. */
-            public static final double MAX_SPEED = 100;
+            public static final double MAX_SPEED = Units.feetToMeters(14.5);
         
         /** Swerve drive maximum angular speed. */
             public static final double MAX_ANGULAR_SPEED = 50;
