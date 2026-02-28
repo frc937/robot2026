@@ -30,40 +30,34 @@ public class DriveRobot extends Command {
   public DriveRobot(Drive drivebase, CommandXboxController drivingController) {
     this.drivebase = drivebase;
     this.drivingController = drivingController;
+    
 
     addRequirements(drivebase);
   }
 
 
-  private double getDeadbandedAxis(double axis) {
-    return MathUtil.applyDeadband(axis, 0.1);
-
-  }
-
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {}
+
+
+  private double deadbandedAxis(double axis) {
+    return MathUtil.applyDeadband(axis, DriveConstants.CONTROLLER_DEADBAND);
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
 
-
-    double xInput = Math.pow(getDeadbandedAxis(drivingController.getLeftX()), 2)  * Math.signum(drivingController.getLeftX());
-    double yInput = Math.pow(getDeadbandedAxis(drivingController.getLeftY()), 2)  * Math.signum(drivingController.getLeftY());
-    double headingXInput = 
-    Math.pow(getDeadbandedAxis(drivingController.getRightX()), 2)  * Math.signum(drivingController.getRightX());
-    //System.out.println(" x" + xInput + " y" + yInput + " Hx" + headingXInput);
-
-
-    Translation2d translation = new Translation2d(
-      xInput * DriveConstants.MAX_SPEED,
-      yInput * DriveConstants.MAX_SPEED);
-
-    double heading = headingXInput * DriveConstants.MAX_ANGULAR_SPEED;
-
-  
-    drivebase.drive(translation, heading, false);
+    ChassisSpeeds desiredSpeeds = drivebase.getTargetSpeeds(
+      deadbandedAxis(drivingController.getLeftX()), 
+      deadbandedAxis(drivingController.getLeftY()), 
+      deadbandedAxis(drivingController.getRightX()), 
+      deadbandedAxis(drivingController.getRightY())
+    );
+    
+    
+    drivebase.drive(desiredSpeeds);
   }
 
   // Called once the command ends or is interrupted.

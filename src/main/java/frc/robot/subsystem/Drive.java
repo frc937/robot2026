@@ -172,6 +172,7 @@ public class Drive extends SubsystemBase
   public void drive(ChassisSpeeds velocity)
   {
     swerveDrive.drive(velocity);
+    System.out.println(swerveDrive.getRobotVelocity());
   }
 
   /**
