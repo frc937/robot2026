@@ -63,8 +63,9 @@ public static DriveRobot driveRobot= new DriveRobot(drivebase, pilotController);
   }
   
   private void configureBindings() {
-    operatorController.leftBumper().whileTrue(Commands.runOnce(shooter::runIntake, shooter));
-    operatorController.rightBumper().whileTrue(Commands.runOnce(shooter::runShooter, shooter));
+    operatorController.a().whileTrue(Commands.run(shooter::runIntake, shooter).finallyDo(shooter::stop));
+    operatorController.b().whileTrue(Commands.run(shooter::runShooter, shooter).finallyDo(shooter::stop));
+
 
   }
 /**Get the current autonomus command.

@@ -13,8 +13,12 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.trajectory.Trajectory;
+import edu.wpi.first.networktables.GenericEntry;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Config;
@@ -40,6 +44,9 @@ public class Drive extends SubsystemBase
    * Swerve drive object.
    */
   private final SwerveDrive swerveDrive;
+
+  private static NetworkTable driveTable = NetworkTableInstance.getDefault().getTable("Teleoperated");
+  
 
   /**
    * Initialize {@link SwerveDrive} with the directory provided.
@@ -74,8 +81,11 @@ public class Drive extends SubsystemBase
     swerveDrive.setModuleEncoderAutoSynchronize(false,
                                                 1); // Enable if you want to resynchronize your absolute encoders and motor encoders periodically when they are not moving.
     // swerveDrive.pushOffsetsToEncoders(); // Set the absolute encoder to be used over the internal encoder and push the offsets onto it. Throws warning if not possible
+  
+  
+    
   }
-
+  
 
   @Override
   public void periodic()
@@ -173,6 +183,11 @@ public class Drive extends SubsystemBase
   {
     swerveDrive.drive(velocity);
     System.out.println(swerveDrive.getRobotVelocity());
+  }
+
+
+  public void drive(Translation2d translation, double rotation, boolean fieldRelative) {
+    swerveDrive.drive(translation, rotation, fieldRelative, false);
   }
 
   /**

@@ -50,19 +50,20 @@ public class DriveRobot extends Command {
   public void execute() {
 
     ChassisSpeeds desiredSpeeds = drivebase.getTargetSpeeds(
-      deadbandedAxis(drivingController.getLeftX()), 
       deadbandedAxis(drivingController.getLeftY()), 
+      deadbandedAxis(drivingController.getLeftX()), 
       deadbandedAxis(drivingController.getRightX()), 
       deadbandedAxis(drivingController.getRightY())
     );
-    
-    
+
+        
     drivebase.drive(desiredSpeeds);
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+  }
 
   // Returns true when the command should end.
   @Override
