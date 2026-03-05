@@ -6,30 +6,30 @@ package frc.robot.command;
 
 
 import edu.wpi.first.math.MathUtil;
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.subsystem.Drive;
-import swervelib.SwerveController;
-import swervelib.SwerveInputStream;
 
 /** Drives the robot. */
 public class DriveRobot extends Command {
 
   private final Drive drivebase;
   private final CommandXboxController drivingController;
+  
+  private boolean fieldRelative;
+
   /**
    * Drives the robot.
    * 
    * @param drivebase Required drive subsystem.
    * @param pilotController
    */
-  public DriveRobot(Drive drivebase, CommandXboxController drivingController) {
+  public DriveRobot(Drive drivebase, CommandXboxController drivingController, boolean fieldRelative) {
     this.drivebase = drivebase;
     this.drivingController = drivingController;
+    this.fieldRelative = fieldRelative;
     
 
     addRequirements(drivebase);
@@ -49,15 +49,11 @@ public class DriveRobot extends Command {
   @Override
   public void execute() {
 
-    ChassisSpeeds desiredSpeeds = drivebase.getTargetSpeeds(
-      deadbandedAxis(drivingController.getLeftY()), 
-      deadbandedAxis(drivingController.getLeftX()), 
-      deadbandedAxis(drivingController.getRightX()), 
-      deadbandedAxis(drivingController.getRightY())
-    );
-
+    Translation2d translation = new Translation2d(
+      -deadbandedAxis(drivingController.getLeftY()), 
+      -deadbandedAxis(drivingController.getLeftX()));
         
-    drivebase.drive(desiredSpeeds);
+    drivebase.drive(translation, -(deadbandedAxis(drivingController.getRightX()) * 2), fieldRelative);
   }
 
   // Called once the command ends or is interrupted.

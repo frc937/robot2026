@@ -1,6 +1,6 @@
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
+// the WPILib BSD license file in the root director`y of this project.
 
 package frc.robot;
 
@@ -43,14 +43,14 @@ public final class Constants {
         public static final int BACK_MOTOR_ID = 14;
 
         /** Motor speed for the Shooter system. */
-        public static final double MOTOR_SPEED = 0.5;
+        public static final double MOTOR_SPEED = .95;
     }
 
     /** Constants that relate to the Drive subsystem. */
     public static final class DriveConstants {
 
         /** Swerve drive maximum speed. */
-        public static final double MAX_SPEED = Units.feetToMeters(5);
+        public static final double MAX_SPEED = Units.feetToMeters(7);
         
 
         /** Controller deadband */

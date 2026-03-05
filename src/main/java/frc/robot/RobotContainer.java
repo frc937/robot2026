@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.Controllers;
 import frc.robot.command.DriveRobot;
+import frc.robot.command.ToggleFieldRelativity;
 import frc.robot.subsystem.Drive;
 import frc.robot.subsystem.Shooter;
 /** Singleton class that contains all the robot's subsystems, commmands, and button bindings. */
@@ -46,8 +47,16 @@ public class RobotContainer {
    * ************
    */
 
-   /** singleton instance of the {@link DriveRobot} command for the whole robot. */
-public static DriveRobot driveRobot= new DriveRobot(drivebase, pilotController);
+   /** singleton instance of the robot oriented {@link DriveRobot} command for the whole robot. */
+  public static DriveRobot driveRobotOriented = new DriveRobot(drivebase, pilotController, false);
+
+  /** singleton instance of the field oriented {@link DriveRobot} command for the whole robot. */
+  public static DriveRobot driveFieldOriented = new DriveRobot(drivebase, pilotController, true);
+
+  public static ToggleFieldRelativity toggleFieldRelativity = new ToggleFieldRelativity(
+    drivebase, 
+    driveRobotOriented,
+    driveFieldOriented);
 
   /*
    * ***********************
@@ -59,14 +68,16 @@ public static DriveRobot driveRobot= new DriveRobot(drivebase, pilotController);
   public RobotContainer() {
     configureBindings();
 
-    drivebase.setDefaultCommand(driveRobot);
+    drivebase.setDefaultCommand(driveRobotOriented);
   }
   
   private void configureBindings() {
-    operatorController.a().whileTrue(Commands.run(shooter::runIntake, shooter).finallyDo(shooter::stop));
-    operatorController.b().whileTrue(Commands.run(shooter::runShooter, shooter).finallyDo(shooter::stop));
+    operatorController.leftTrigger().whileTrue(Commands.run(shooter::runIntake, shooter).finallyDo(shooter::stop));
+    operatorController.rightTrigger().whileTrue(Commands.run(shooter::runShooter, shooter).finallyDo(shooter::stop));
 
-
+    pilotController.b().whileTrue(Commands.run(drivebase::lock, drivebase));
+    pilotController.leftStick().onTrue(toggleFieldRelativity);
+    
   }
 /**Get the current autonomus command.
  * 

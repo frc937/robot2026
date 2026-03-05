@@ -28,15 +28,13 @@ public class Shooter extends SubsystemBase {
   /** Runs the Shooter. */
   public void runShooter() {
     frontMotor.set(ShooterConstants.MOTOR_SPEED);
-    backMotor.set(-ShooterConstants.MOTOR_SPEED);
-    System.out.println("running shooter at: " + frontMotor.getAppliedOutput());
+    backMotor.set(ShooterConstants.MOTOR_SPEED);
   }
 
   /** Runs the Intake. */
   public void runIntake() {
     frontMotor.set(ShooterConstants.MOTOR_SPEED);
-    backMotor.set(ShooterConstants.MOTOR_SPEED);
-    System.out.println("running intake at: " + frontMotor.getAppliedOutput());
+    backMotor.set(-ShooterConstants.MOTOR_SPEED);
   }
 
   public void stop() {
