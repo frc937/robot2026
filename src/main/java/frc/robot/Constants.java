@@ -6,6 +6,8 @@ package frc.robot;
 
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 
+import edu.wpi.first.math.util.Units;
+
 /** Constants for the entire robot. */
 public final class Constants {
 
@@ -40,6 +42,10 @@ public final class Constants {
 
         /** Motor speed for the Shooter system. */
         public static final double MOTOR_SPEED = 0.5;
+    }
+
+    public static final class DriveConstants {
+        public static final Double MAX_SPEED = Units.feetToMeters(10);
     }
 
     
