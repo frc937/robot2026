@@ -74,6 +74,7 @@ public class RobotContainer {
   private void configureBindings() {
     operatorController.leftTrigger().whileTrue(Commands.run(shooter::runIntake, shooter).finallyDo(shooter::stop));
     operatorController.rightTrigger().whileTrue(Commands.run(shooter::runShooter, shooter).finallyDo(shooter::stop));
+    operatorController.b().whileTrue(Commands.run(shooter::runIntakeReverse, shooter).finallyDo(shooter::stop));
 
     pilotController.b().whileTrue(Commands.run(drivebase::lock, drivebase));
     pilotController.leftStick().onTrue(toggleFieldRelativity);

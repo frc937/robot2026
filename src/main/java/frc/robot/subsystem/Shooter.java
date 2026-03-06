@@ -37,6 +37,11 @@ public class Shooter extends SubsystemBase {
     backMotor.set(-ShooterConstants.MOTOR_SPEED);
   }
 
+  public void runIntakeReverse() {
+    frontMotor.set(-ShooterConstants.MOTOR_SPEED);
+    backMotor.set(-ShooterConstants.MOTOR_SPEED);
+  }
+
   public void stop() {
     frontMotor.set(0);
     backMotor.set(0);
