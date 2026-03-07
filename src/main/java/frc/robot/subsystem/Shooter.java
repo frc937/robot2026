@@ -19,8 +19,8 @@ public class Shooter extends SubsystemBase {
   
   /** Constructor for the Shooter subsystem. */
   public Shooter() {
-    this.frontMotor = new SparkMax(ShooterConstants.FRONT_MOTOR_ID , MotorType.kBrushed);
-    this.backMotor = new SparkMax(ShooterConstants.BACK_MOTOR_ID, MotorType.kBrushed);
+    this.frontMotor = new SparkMax(ShooterConstants.FRONT_MOTOR_ID , MotorType.kBrushless);
+    this.backMotor = new SparkMax(ShooterConstants.BACK_MOTOR_ID, MotorType.kBrushless);
 
     MotorConfigure.initShooterMotors(frontMotor, backMotor);
   }
@@ -28,13 +28,23 @@ public class Shooter extends SubsystemBase {
   /** Runs the Shooter. */
   public void runShooter() {
     frontMotor.set(ShooterConstants.MOTOR_SPEED);
-    backMotor.set(-ShooterConstants.MOTOR_SPEED);
+    backMotor.set(ShooterConstants.MOTOR_SPEED);
   }
 
   /** Runs the Intake. */
   public void runIntake() {
     frontMotor.set(ShooterConstants.MOTOR_SPEED);
-    backMotor.set(ShooterConstants.MOTOR_SPEED);
+    backMotor.set(-ShooterConstants.MOTOR_SPEED);
+  }
+
+  public void runIntakeReverse() {
+    frontMotor.set(-ShooterConstants.MOTOR_SPEED);
+    backMotor.set(-ShooterConstants.MOTOR_SPEED);
+  }
+
+  public void stop() {
+    frontMotor.set(0);
+    backMotor.set(0);
   }
   
   @Override
