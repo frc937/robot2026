@@ -57,6 +57,18 @@ public final class Constants {
         public static final double CONTROLLER_DEADBAND = 0.1;
     }
 
+    /** Constants for Climber mechanism */
+    public static final class ClimberConstants {
+
+        /** speeds */
+        public static final double CIAB_SPEED = 0.5; //IMPORTANT: UNTESTED VALUE
+        public static final double CHAIN_SPEED = 0.5; //IMPORTANT: UNTESTED VALUE
+        
+        /** motor CAN IDs */
+        public static final int CIAB_1_MOTOR_PORT = 15; //placeholder value
+        public static final int CIAB_2_MOTOR_PORT = 16; //placeholder value
+        public static final int CHAIN_MOTOR_PORT = 17; //placeholder value
+    }
     
 }
 
