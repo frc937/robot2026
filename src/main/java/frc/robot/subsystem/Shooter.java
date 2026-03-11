@@ -9,7 +9,7 @@ import com.revrobotics.spark.SparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ShooterConstants;
-import frc.robot.MotorConfigure;
+import frc.robot.util.MotorConfigure;
 
 /** Subsystem for the Shooter. */
 public class Shooter extends SubsystemBase {
