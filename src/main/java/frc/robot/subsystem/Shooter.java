@@ -37,14 +37,16 @@ public class Shooter extends SubsystemBase {
     backMotor.set(-ShooterConstants.MOTOR_SPEED);
   }
 
+  /** Runs the shooter in the opposite direction. */
   public void runIntakeReverse() {
     frontMotor.set(-ShooterConstants.MOTOR_SPEED);
     backMotor.set(-ShooterConstants.MOTOR_SPEED);
   }
 
+  /** Stops the shooter motors */
   public void stop() {
-    frontMotor.set(0);
-    backMotor.set(0);
+    frontMotor.stopMotor();;
+    backMotor.stopMotor();;
   }
   
   @Override
