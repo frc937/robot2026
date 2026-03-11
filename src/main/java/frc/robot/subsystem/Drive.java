@@ -43,10 +43,7 @@ public class Drive extends SubsystemBase
   /**
    * Swerve drive object.
    */
-  private final SwerveDrive swerveDrive;
-
-  private static NetworkTable driveTable = NetworkTableInstance.getDefault().getTable("Teleoperated");
-  
+  private final SwerveDrive swerveDrive;  
 
   /**
    * Initialize {@link SwerveDrive} with the directory provided.
@@ -63,7 +60,7 @@ public class Drive extends SubsystemBase
                                                                       Meter.of(4)),
                                                     Rotation2d.fromDegrees(180));
     // Configure the Telemetry before creating the SwerveDrive to avoid unnecessary objects being created.
-    SwerveDriveTelemetry.verbosity = TelemetryVerbosity.HIGH;
+    SwerveDriveTelemetry.verbosity = TelemetryVerbosity.HIGH; //TODO: REMOVE BEFORE COMP!!!!! (they dont like how much it muddies the network)
     try
     {
       swerveDrive = new SwerveParser(directory).createSwerveDrive(DriveConstants.MAX_SPEED, startingPose);

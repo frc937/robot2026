@@ -7,12 +7,14 @@ package frc.robot.command;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystem.Drive;
 
-/* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
+/** Toggles field relativity for driving. */
 public class ToggleFieldRelativity extends Command {
+
   private Drive drivebase;
   private DriveRobot driveRobotOrientedCommand;
   private DriveRobot driveFieldOrientedCommand;
-  /** Creates a new ToggleFieldRelativity. */
+
+  /** Toggles field relativity for driving. */
   public ToggleFieldRelativity(Drive drivebase, DriveRobot driveROCommand, DriveRobot driveFOCommand) {
     this.drivebase = drivebase;
     this.driveRobotOrientedCommand = driveROCommand;

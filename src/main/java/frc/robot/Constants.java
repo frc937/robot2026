@@ -7,8 +7,6 @@ package frc.robot;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 
 import edu.wpi.first.math.util.Units;
-import edu.wpi.first.units.Unit;
-
 
 
 /** Constants for the entire robot. */
@@ -43,17 +41,17 @@ public final class Constants {
         public static final int BACK_MOTOR_ID = 14;
 
         /** Motor speed for the Shooter system. */
-        public static final double MOTOR_SPEED = .95;
+        public static final double MOTOR_SPEED = .95; /* Between 0.0 and 1.0 */
     }
 
     /** Constants that relate to the Drive subsystem. */
     public static final class DriveConstants {
 
-        /** Swerve drive maximum speed. */
+        /** Swerve drive maximum speed in feet. */
         public static final double MAX_SPEED = Units.feetToMeters(7);
         
 
-        /** Controller deadband */
+        /** Controller axis deadband */
         public static final double CONTROLLER_DEADBAND = 0.1;
     }
 
