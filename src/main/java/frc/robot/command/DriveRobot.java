@@ -52,8 +52,12 @@ public class DriveRobot extends Command {
     Translation2d translation = new Translation2d(
       -deadbandedAxis(drivingController.getLeftY()), 
       -deadbandedAxis(drivingController.getLeftX()));
+    
+      
+    double rotation = -(deadbandedAxis(drivingController.getRightX())) * 2;
         
-    drivebase.drive(translation, -(deadbandedAxis(drivingController.getRightX()) * 2), fieldRelative);
+
+    drivebase.drive(translation, rotation, fieldRelative);
   }
 
   // Called once the command ends or is interrupted.
