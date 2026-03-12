@@ -7,12 +7,15 @@ package frc.robot;
 import java.io.File;
 
 import edu.wpi.first.wpilibj.Filesystem;
+import edu.wpi.first.wpilibj.XboxController.Axis;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.Controllers;
 import frc.robot.command.DriveRobot;
 import frc.robot.command.ToggleFieldRelativity;
+import frc.robot.subsystem.ClimberSubsystem;
 import frc.robot.subsystem.Drive;
 import frc.robot.subsystem.Shooter;
 /** Singleton class that contains all the robot's subsystems, commmands, and button bindings. */
@@ -40,6 +43,8 @@ public class RobotContainer {
 
    /** Singleton instance of the {@link Shooter} for the whole robot. */
    public static Shooter shooter = new Shooter();
+
+   public static ClimberSubsystem climber = new ClimberSubsystem();
 
   /*
    * ************
@@ -75,6 +80,11 @@ public class RobotContainer {
     operatorController.leftTrigger().whileTrue(Commands.run(shooter::runIntake, shooter).finallyDo(shooter::stop));
     operatorController.rightTrigger().whileTrue(Commands.run(shooter::runShooter, shooter).finallyDo(shooter::stop));
     operatorController.b().whileTrue(Commands.run(shooter::runIntakeReverse, shooter).finallyDo(shooter::stop));
+    /**Climber controls. Change to whatever is best for drivers. */
+    operatorController.axisGreaterThan(Axis.kRightY.value, 0.5).whileTrue(new StartEndCommand(climber::runClimberInABox, climber::stopClimberInABox, climber));
+    operatorController.axisLessThan(Axis.kRightY.value, -0.5).whileTrue(new StartEndCommand(climber::reverseClimberInABox, climber::stopClimberInABox, climber));
+    operatorController.axisGreaterThan(Axis.kLeftY.value, 0.5).whileTrue(new StartEndCommand(climber::runChainClimber, climber::stopChainClimber, climber));
+    operatorController.axisLessThan(Axis.kLeftY.value, -0.5).whileTrue(new StartEndCommand(climber::reverseChainClimber, climber::stopChainClimber, climber));
 
     pilotController.b().whileTrue(Commands.run(drivebase::lock, drivebase));
     pilotController.leftStick().onTrue(toggleFieldRelativity);
