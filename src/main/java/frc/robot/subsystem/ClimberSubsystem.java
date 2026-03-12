@@ -35,39 +35,40 @@ public class ClimberSubsystem extends SubsystemBase {
     }
 
     public void runClimberInABox() {
-        
+        ciabLeaderMotor.set(ClimberConstants.CIAB_SPEED);
     }
 
     public void runClimberInABox(double speed) {
-
+        ciabLeaderMotor.set(speed);
     }
 
     public void runChainClimber() {
-
+        chainMotor.set(ClimberConstants.CHAIN_SPEED);
     }
 
     public void runChainClimber(double speed) {
-
+        chainMotor.set(speed);
     }
 
     public void reverseClimberInABox() {
-
+        ciabLeaderMotor.set(-ClimberConstants.CIAB_SPEED);
     }
 
     public void reverseChainClimber() {
-
+        chainMotor.set(-ClimberConstants.CHAIN_SPEED);
     }
 
     public void stopClimberInABox() {
-
+        ciabLeaderMotor.stopMotor();
     }
 
     public void stopChainClimber() {
-
+        chainMotor.stopMotor();
     }
 
     public void stop() {
-
+        ciabLeaderMotor.stopMotor();
+        chainMotor.stopMotor();
     }
 
 }
