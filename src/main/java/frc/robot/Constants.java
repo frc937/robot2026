@@ -68,6 +68,10 @@ public final class Constants {
         public static final int CIAB_1_MOTOR_PORT = 15; //placeholder value
         public static final int CIAB_2_MOTOR_PORT = 16; //placeholder value
         public static final int CHAIN_MOTOR_PORT = 17; //placeholder value
+
+        /** IR distance thresholds */
+        public static final int TOWER_ALIGNMENT_DIST = 2000; //placeholder value, distance (mm) from IR to tower back wall
+        public static final int CLIMBING_ALIGNMENT_DIST = 100; //placeholder value, distance (mm) from IR to tower rung
     }
     
 }
