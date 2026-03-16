@@ -72,6 +72,9 @@ public final class Constants {
         /** IR distance thresholds */
         public static final int TOWER_ALIGNMENT_DIST = 2000; //placeholder value, distance (mm) from IR to tower back wall
         public static final int CLIMBING_ALIGNMENT_DIST = 100; //placeholder value, distance (mm) from IR to tower rung
+
+        /** Limit switch constants */
+        public static final int LIMIT_SWITCH_DIO_PORT = 0; //placeholder value. please wire such that limit switch triggered is true
     }
     
 }
