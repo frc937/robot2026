@@ -24,6 +24,6 @@ public class LowerCIAB extends Command {
 
     @Override
     public boolean isFinished() {
-        return climber.getLimitSwitchState();
+        return climber.getMagLimitState();
     }
 }
