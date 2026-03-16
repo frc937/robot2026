@@ -3,11 +3,11 @@ package frc.robot.command;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystem.ClimberSubsystem;
 
-public class LowerCIAB extends Command {
+public class LowerCIABFull extends Command {
 
     private ClimberSubsystem climber;
 
-    public LowerCIAB(ClimberSubsystem climber) {
+    public LowerCIABFull(ClimberSubsystem climber) {
         this.climber = climber;
         addRequirements(climber);
     }
