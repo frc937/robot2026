@@ -7,6 +7,7 @@ package frc.robot.command;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.DriveConstants;
@@ -18,7 +19,7 @@ public class DriveRobot extends Command {
   private final Drive drivebase;
   private final CommandXboxController drivingController;
   
-  private boolean fieldRelative;
+  private final boolean fieldRelative;
 
   /**
    * Drives the robot.
@@ -54,6 +55,8 @@ public class DriveRobot extends Command {
       -deadbandedAxis(drivingController.getLeftX()));
         
     drivebase.drive(translation, -(deadbandedAxis(drivingController.getRightX()) * 2), fieldRelative);
+
+    SmartDashboard.putBoolean("Field Oriented", fieldRelative);
   }
 
   // Called once the command ends or is interrupted.

@@ -8,6 +8,8 @@ import java.io.File;
 
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.XboxController.Axis;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
@@ -26,7 +28,9 @@ public class RobotContainer {
 
    /**Singleton instance of the Operator controller for the whole robot. */
   public static CommandXboxController operatorController = new CommandXboxController(Controllers.OPERATOR_CONTROLLER_PORT);
-   /** Constructer for the {@link RobotContainer} */
+  
+
+  private SendableChooser<Command> autoChooser = new SendableChooser<>();
 
 
 
@@ -72,8 +76,18 @@ public class RobotContainer {
 
   public RobotContainer() {
     configureBindings();
+    configureAuto();
 
-    drivebase.setDefaultCommand(driveRobotOriented);
+    drivebase.setDefaultCommand(driveFieldOriented);
+  }
+
+  private void configureAuto() {
+    autoChooser.setDefaultOption("None", Commands.none());
+
+    /* Add auto options below vvvvvvvvv */
+    autoChooser.addOption("Drive Forward 1 Second", drivebase.driveForward().withTimeout(1));
+
+    SmartDashboard.putData("Select Auto", autoChooser);
   }
   
   private void configureBindings() {
@@ -87,14 +101,15 @@ public class RobotContainer {
     operatorController.axisLessThan(Axis.kLeftY.value, -0.5).whileTrue(new StartEndCommand(climber::reverseChainClimber, climber::stopChainClimber, climber));
 
     pilotController.b().whileTrue(Commands.run(drivebase::lock, drivebase));
-    pilotController.leftStick().onTrue(toggleFieldRelativity);
-    
+    pilotController.y().onTrue(toggleFieldRelativity);
+
+    SmartDashboard.putData("Toggle Field Relativity", toggleFieldRelativity);
   }
 /**Get the current autonomus command.
  * 
  * @return The current autonomus command.
  */
   public Command getAutonomousCommand() {
-    return Commands.print("No autonomous command configured");
+    return autoChooser.getSelected();
   }
 }
