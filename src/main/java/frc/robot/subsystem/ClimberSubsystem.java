@@ -23,6 +23,8 @@ public class ClimberSubsystem extends SubsystemBase {
 
     private Rev2mDistanceSensor ciabIR = new Rev2mDistanceSensor(Port.kMXP, Unit.kMillimeters, RangeProfile.kDefault);
     private DigitalInput magLimitSwitch = new DigitalInput(ClimberConstants.LIMIT_SWITCH_DIO_PORT);
+    private DigitalInput chainUpLimitSwitch = new DigitalInput(ClimberConstants.CHAIN_UP_LIMIT_DIO_PORT);
+    private DigitalInput chainDownLimitSwitch = new DigitalInput(ClimberConstants.CHAIN_DOWN_LIMIT_DIO_PORT);
     
     public ClimberSubsystem() {
         /**Motor configs
@@ -136,4 +138,19 @@ public class ClimberSubsystem extends SubsystemBase {
         return magLimitSwitch.get();
     }
 
+    /**Get current reading of chain down limit switch.
+     * 
+     * @return True when limit switch triggered, false otherwise.
+     */
+    public Boolean getChainDownLimitState() {
+        return chainDownLimitSwitch.get();
+    }
+
+    /**Get current reading of chain up limit switch.
+     * 
+     * @return True when limit switch triggered, false otherwise.
+     */
+    public Boolean getChainUpLimitState() {
+        return chainUpLimitSwitch.get();
+    }
 }
