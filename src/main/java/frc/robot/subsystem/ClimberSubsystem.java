@@ -11,6 +11,7 @@ import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ClimberConstants;
 
@@ -21,6 +22,7 @@ public class ClimberSubsystem extends SubsystemBase {
     private SparkMax chainMotor = new SparkMax(ClimberConstants.CHAIN_MOTOR_PORT, MotorType.kBrushed);
 
     private Rev2mDistanceSensor ciabIR = new Rev2mDistanceSensor(Port.kMXP, Unit.kMillimeters, RangeProfile.kDefault);
+    private DigitalInput magLimitSwitch = new DigitalInput(ClimberConstants.LIMIT_SWITCH_DIO_PORT);
     
     public ClimberSubsystem() {
         /**Motor configs
@@ -124,6 +126,14 @@ public class ClimberSubsystem extends SubsystemBase {
      */
     public Boolean isClimbReady() {
         return (getIRRange() < ClimberConstants.CLIMBING_ALIGNMENT_DIST && isIRRangeValid());
+    }
+
+    /**Get the current reading of the magnetic limit switch.
+     * 
+     * @return True when limit switch triggered, false otherwise.
+     */
+    public Boolean getLimitSwitchState() {
+        return magLimitSwitch.get();
     }
 
 }
