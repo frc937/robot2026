@@ -3,11 +3,11 @@ package frc.robot.command;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystem.ClimberSubsystem;
 
-public class RaiseClimberToRung extends Command {
+public class RaiseCIABToRung extends Command {
 
     private ClimberSubsystem climber;
 
-    public RaiseClimberToRung(ClimberSubsystem climber) {
+    public RaiseCIABToRung(ClimberSubsystem climber) {
         this.climber = climber;
         addRequirements(climber);
     }
