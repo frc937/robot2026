@@ -75,6 +75,8 @@ public final class Constants {
 
         /** Limit switch constants */
         public static final int LIMIT_SWITCH_DIO_PORT = 0; //placeholder value. please wire such that limit switch triggered is true
+        public static final int CHAIN_UP_LIMIT_DIO_PORT = 1; //placeholder value
+        public static final int CHAIN_DOWN_LIMIT_DIO_PORT = 2; //placeholder value
     }
     
 }
