@@ -6,6 +6,7 @@ import frc.robot.subsystem.ClimberSubsystem;
 public class RaiseClimberToRung extends Command {
 
     private ClimberSubsystem climber;
+    private boolean isFinished = false;
 
     public RaiseClimberToRung(ClimberSubsystem climber) {
         this.climber = climber;
@@ -14,26 +15,24 @@ public class RaiseClimberToRung extends Command {
 
     @Override
     public void initialize() {
-        // TODO Auto-generated method stub
-        super.initialize();
+        climber.runClimberInABox();
     }   
 
     @Override
     public void execute() {
-        // TODO Auto-generated method stub
-        super.execute();
+        if (climber.isClimbReady()) {
+            isFinished = true;
+        }
     }
 
     @Override
     public void end(boolean interrupted) {
-        // TODO Auto-generated method stub
-        super.end(interrupted);
+        climber.stopClimberInABox();
     }
 
     @Override
     public boolean isFinished() {
-        // TODO Auto-generated method stub
-        return super.isFinished();
+        return isFinished;
     }
 
 }
