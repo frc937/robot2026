@@ -14,8 +14,8 @@ import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.Controllers;
 import frc.robot.command.DriveRobot;
-import frc.robot.command.LowerCIABFull;
-import frc.robot.command.RaiseCIABFull;
+import frc.robot.command.LowerCIAB;
+import frc.robot.command.RaiseCIAB;
 import frc.robot.command.ToggleFieldRelativity;
 import frc.robot.subsystem.ClimberSubsystem;
 import frc.robot.subsystem.Drive;
@@ -65,8 +65,8 @@ public class RobotContainer {
     driveRobotOriented,
     driveFieldOriented);
 
-  public static RaiseCIABFull raiseCIABFull = new RaiseCIABFull(climber);
-  public static LowerCIABFull lowerCIABFull = new LowerCIABFull(climber);
+  public static RaiseCIAB raiseCIABFull = new RaiseCIAB(climber);
+  public static LowerCIAB lowerCIABFull = new LowerCIAB(climber);
 
   /*
    * ***********************

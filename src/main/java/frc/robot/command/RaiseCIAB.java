@@ -3,18 +3,18 @@ package frc.robot.command;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystem.ClimberSubsystem;
 
-public class LowerCIABFull extends Command {
+public class RaiseCIAB extends Command {
 
     private ClimberSubsystem climber;
 
-    public LowerCIABFull(ClimberSubsystem climber) {
+    public RaiseCIAB(ClimberSubsystem climber) {
         this.climber = climber;
         addRequirements(climber);
     }
 
     @Override
     public void initialize() {
-        climber.reverseClimberInABox();
+        climber.runClimberInABox();
     }
 
     @Override
