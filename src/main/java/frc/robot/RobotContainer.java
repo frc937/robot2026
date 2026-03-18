@@ -92,11 +92,11 @@ public class RobotContainer {
     operatorController.axisLessThan(Axis.kLeftY.value, -0.5).whileTrue(new StartEndCommand(climber::reverseChainClimber, climber::stopChainClimber, climber));
 
     /**Test controls for sensor-based climber commands */
-    operatorController.leftBumper().onTrue(lowerCIAB);
-    operatorController.rightBumper().onTrue(raiseCIAB);
+    operatorController.x().onTrue(lowerCIAB);
+    operatorController.y().onTrue(raiseCIAB);
 
     pilotController.b().whileTrue(Commands.run(drivebase::lock, drivebase));
-    pilotController.leftStick().onTrue(toggleFieldRelativity);
+    pilotController.y().onTrue(toggleFieldRelativity);
     
   }
 /**Get the current autonomus command.
