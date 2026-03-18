@@ -88,6 +88,7 @@ public class RobotContainer {
     autoChooser.addOption("Drive Forward 1 Second", drivebase.driveForward().withTimeout(1));
 
     SmartDashboard.putData("Select Auto", autoChooser);
+    SmartDashboard.putBoolean("Field Oriented", true);
   }
   
   private void configureBindings() {
