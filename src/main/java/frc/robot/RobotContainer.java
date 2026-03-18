@@ -15,9 +15,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.Controllers;
 import frc.robot.command.DriveRobot;
 import frc.robot.command.LowerCIABFull;
-import frc.robot.command.LowerCIABToRung;
 import frc.robot.command.RaiseCIABFull;
-import frc.robot.command.RaiseCIABToRung;
 import frc.robot.command.ToggleFieldRelativity;
 import frc.robot.subsystem.ClimberSubsystem;
 import frc.robot.subsystem.Drive;
@@ -67,9 +65,7 @@ public class RobotContainer {
     driveRobotOriented,
     driveFieldOriented);
 
-  public static RaiseCIABToRung raiseCIABToRung = new RaiseCIABToRung(climber);
   public static RaiseCIABFull raiseCIABFull = new RaiseCIABFull(climber);
-  public static LowerCIABToRung lowerCIABToRung = new LowerCIABToRung(climber);
   public static LowerCIABFull lowerCIABFull = new LowerCIABFull(climber);
 
   /*
@@ -96,8 +92,6 @@ public class RobotContainer {
     operatorController.axisLessThan(Axis.kLeftY.value, -0.5).whileTrue(new StartEndCommand(climber::reverseChainClimber, climber::stopChainClimber, climber));
 
     /**Test controls for sensor-based climber commands */
-    operatorController.x().onTrue(lowerCIABToRung);
-    operatorController.y().onTrue(raiseCIABToRung);
     operatorController.leftBumper().onTrue(lowerCIABFull);
     operatorController.rightBumper().onTrue(raiseCIABFull);
 

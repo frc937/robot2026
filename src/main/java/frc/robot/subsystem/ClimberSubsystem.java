@@ -2,10 +2,6 @@ package frc.robot.subsystem;
 
 import com.revrobotics.PersistMode;
 import com.revrobotics.ResetMode;
-import com.revrobotics.Rev2mDistanceSensor;
-import com.revrobotics.Rev2mDistanceSensor.Port;
-import com.revrobotics.Rev2mDistanceSensor.RangeProfile;
-import com.revrobotics.Rev2mDistanceSensor.Unit;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.config.SparkMaxConfig;
@@ -21,7 +17,6 @@ public class ClimberSubsystem extends SubsystemBase {
     private SparkMax ciabFollowerMotor = new SparkMax(ClimberConstants.CIAB_2_MOTOR_PORT, MotorType.kBrushed);
     private SparkMax chainMotor = new SparkMax(ClimberConstants.CHAIN_MOTOR_PORT, MotorType.kBrushed);
 
-    private Rev2mDistanceSensor ciabIR = new Rev2mDistanceSensor(Port.kMXP, Unit.kMillimeters, RangeProfile.kDefault);
     private DigitalInput magLimitSwitch = new DigitalInput(ClimberConstants.LIMIT_SWITCH_DIO_PORT);
     private DigitalInput chainUpLimitSwitch = new DigitalInput(ClimberConstants.CHAIN_UP_LIMIT_DIO_PORT);
     private DigitalInput chainDownLimitSwitch = new DigitalInput(ClimberConstants.CHAIN_DOWN_LIMIT_DIO_PORT);
@@ -94,40 +89,6 @@ public class ClimberSubsystem extends SubsystemBase {
     public void stop() {
         ciabLeaderMotor.stopMotor();
         chainMotor.stopMotor();
-    }
-
-    /**Get the current reading of the IR Sensor 
-     * 
-     * @return Distance in MilliMeters of closest object to IR Sensor
-    */
-    public double getIRRange() {
-        return ciabIR.getRange();
-    }
-
-    /**Check if IR Sensor is reading a valid value
-     * 
-     * @return True if range between 0 and 2 meters, false otherwise
-     */
-    public Boolean isIRRangeValid() {
-        return ciabIR.isRangeValid();
-    }
-
-    /**Check if robot is close to Tower.
-     * Assumes validity based only on distance. Should only be used in applicable contexts.
-     * 
-     * @return True if IR Sensor reading is valid and less than Tower Alignment Distance in {@link ClimberConstants}
-     */
-    public Boolean isNearTower() {
-        return (getIRRange() < ClimberConstants.TOWER_ALIGNMENT_DIST && isIRRangeValid()); 
-    }
-
-    /**Check if climber in a box is at height of tower rung.
-     * Assumes validity based only on distance. Should only be used in applicable contexts.
-     * 
-     * @return True if IR Sensor reading is valid and less than Climbing Alignment Distance in {@link ClimberConstants}
-     */
-    public Boolean isClimbReady() {
-        return (getIRRange() < ClimberConstants.CLIMBING_ALIGNMENT_DIST && isIRRangeValid());
     }
 
     /**Get the current reading of the magnetic limit switch.
