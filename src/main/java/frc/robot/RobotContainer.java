@@ -95,6 +95,8 @@ public class RobotContainer {
     operatorController.x().onTrue(lowerCIAB);
     operatorController.y().onTrue(raiseCIAB);
 
+    operatorController.a().onTrue(drivebase.driveToDistanceCommand(2, 0.2));
+
     pilotController.b().whileTrue(Commands.run(drivebase::lock, drivebase));
     pilotController.y().onTrue(toggleFieldRelativity);
     
