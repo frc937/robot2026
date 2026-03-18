@@ -65,8 +65,8 @@ public class RobotContainer {
     driveRobotOriented,
     driveFieldOriented);
 
-  public static RaiseCIAB raiseCIABFull = new RaiseCIAB(climber);
-  public static LowerCIAB lowerCIABFull = new LowerCIAB(climber);
+  public static RaiseCIAB raiseCIAB = new RaiseCIAB(climber);
+  public static LowerCIAB lowerCIAB = new LowerCIAB(climber);
 
   /*
    * ***********************
@@ -92,8 +92,8 @@ public class RobotContainer {
     operatorController.axisLessThan(Axis.kLeftY.value, -0.5).whileTrue(new StartEndCommand(climber::reverseChainClimber, climber::stopChainClimber, climber));
 
     /**Test controls for sensor-based climber commands */
-    operatorController.leftBumper().onTrue(lowerCIABFull);
-    operatorController.rightBumper().onTrue(raiseCIABFull);
+    operatorController.leftBumper().onTrue(lowerCIAB);
+    operatorController.rightBumper().onTrue(raiseCIAB);
 
     pilotController.b().whileTrue(Commands.run(drivebase::lock, drivebase));
     pilotController.leftStick().onTrue(toggleFieldRelativity);
