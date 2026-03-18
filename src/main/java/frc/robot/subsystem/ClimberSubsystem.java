@@ -96,7 +96,7 @@ public class ClimberSubsystem extends SubsystemBase {
      * @return True when limit switch triggered, false otherwise.
      */
     public Boolean getMagLimitState() {
-        return magLimitSwitch.get();
+        return !magLimitSwitch.get();
     }
 
     /**Get current reading of chain down limit switch.
