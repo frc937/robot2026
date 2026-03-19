@@ -11,12 +11,14 @@ import edu.wpi.first.wpilibj.XboxController.Axis;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.Controllers;
 import frc.robot.command.DriveRobot;
 import frc.robot.command.ToggleFieldRelativity;
+import frc.robot.command.UpdateIsHubEnabled;
 import frc.robot.subsystem.ClimberSubsystem;
 import frc.robot.subsystem.Drive;
 import frc.robot.subsystem.Shooter;
@@ -66,6 +68,10 @@ public class RobotContainer {
     drivebase, 
     driveRobotOriented,
     driveFieldOriented);
+  
+
+  /** singleton instance of {@link UpdateIsHubEnabled} command for the whole robot. */
+  public static UpdateIsHubEnabled updateIsHubEnabled = new UpdateIsHubEnabled();
 
   /*
    * ***********************
@@ -79,6 +85,8 @@ public class RobotContainer {
     configureAuto();
 
     drivebase.setDefaultCommand(driveFieldOriented);
+    SmartDashboard.putBoolean("Field Oriented", false);
+    CommandScheduler.getInstance().schedule(updateIsHubEnabled);
   }
 
   private void configureAuto() {
@@ -88,7 +96,6 @@ public class RobotContainer {
     autoChooser.addOption("Drive Forward 1 Second", drivebase.driveForward().withTimeout(1));
 
     SmartDashboard.putData("Select Auto", autoChooser);
-    SmartDashboard.putBoolean("Field Oriented", true);
   }
   
   private void configureBindings() {
