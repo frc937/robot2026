@@ -100,6 +100,8 @@ public class RobotContainer {
     /* Add auto options below vvvvvvvvv */
     autoChooser.addOption("Drive Forward 1 Second", drivebase.driveForward().withTimeout(1));
 
+    autoChooser.addOption("Raise Climbers for 1 Second", raiseCIAB.withTimeout(1));
+
     SmartDashboard.putData("Select Auto", autoChooser);
   }
   
@@ -120,10 +122,9 @@ public class RobotContainer {
     operatorController.a().onTrue(drivebase.driveToDistanceCommand(2, 0.2));
 
     pilotController.b().whileTrue(Commands.run(drivebase::lock, drivebase));
+    
     pilotController.y().onTrue(toggleFieldRelativity);
-
     SmartDashboard.putData("Toggle Field Relativity", toggleFieldRelativity);
-    pilotController.y().onTrue(toggleFieldRelativity);
     
   }
 /**Get the current autonomus command.
