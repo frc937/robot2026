@@ -9,9 +9,9 @@ import frc.robot.subsystem.Drive;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class ToggleFieldRelativity extends Command {
-  private Drive drivebase;
-  private DriveRobot driveRobotOrientedCommand;
-  private DriveRobot driveFieldOrientedCommand;
+  private final Drive drivebase;
+  private final DriveRobot driveRobotOrientedCommand;
+  private final DriveRobot driveFieldOrientedCommand;
   /** Creates a new ToggleFieldRelativity. */
   public ToggleFieldRelativity(Drive drivebase, DriveRobot driveROCommand, DriveRobot driveFOCommand) {
     this.drivebase = drivebase;

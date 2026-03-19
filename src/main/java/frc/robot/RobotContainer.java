@@ -8,7 +8,10 @@ import java.io.File;
 
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.XboxController.Axis;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -17,6 +20,7 @@ import frc.robot.command.DriveRobot;
 import frc.robot.command.LowerCIAB;
 import frc.robot.command.RaiseCIAB;
 import frc.robot.command.ToggleFieldRelativity;
+import frc.robot.command.UpdateIsHubEnabled;
 import frc.robot.subsystem.ClimberSubsystem;
 import frc.robot.subsystem.Drive;
 import frc.robot.subsystem.Shooter;
@@ -28,7 +32,9 @@ public class RobotContainer {
 
    /**Singleton instance of the Operator controller for the whole robot. */
   public static CommandXboxController operatorController = new CommandXboxController(Controllers.OPERATOR_CONTROLLER_PORT);
-   /** Constructer for the {@link RobotContainer} */
+  
+
+  private SendableChooser<Command> autoChooser = new SendableChooser<>();
 
 
 
@@ -64,6 +70,10 @@ public class RobotContainer {
     drivebase, 
     driveRobotOriented,
     driveFieldOriented);
+  
+
+  /** singleton instance of {@link UpdateIsHubEnabled} command for the whole robot. */
+  public static UpdateIsHubEnabled updateIsHubEnabled = new UpdateIsHubEnabled();
 
   public static RaiseCIAB raiseCIAB = new RaiseCIAB(climber);
   public static LowerCIAB lowerCIAB = new LowerCIAB(climber);
@@ -77,8 +87,20 @@ public class RobotContainer {
 
   public RobotContainer() {
     configureBindings();
+    configureAuto();
 
-    drivebase.setDefaultCommand(driveRobotOriented);
+    drivebase.setDefaultCommand(driveFieldOriented);
+    SmartDashboard.putBoolean("Field Oriented", false);
+    CommandScheduler.getInstance().schedule(updateIsHubEnabled);
+  }
+
+  private void configureAuto() {
+    autoChooser.setDefaultOption("None", Commands.none());
+
+    /* Add auto options below vvvvvvvvv */
+    autoChooser.addOption("Drive Forward 1 Second", drivebase.driveForward().withTimeout(1));
+
+    SmartDashboard.putData("Select Auto", autoChooser);
   }
   
   private void configureBindings() {
@@ -99,6 +121,9 @@ public class RobotContainer {
 
     pilotController.b().whileTrue(Commands.run(drivebase::lock, drivebase));
     pilotController.y().onTrue(toggleFieldRelativity);
+
+    SmartDashboard.putData("Toggle Field Relativity", toggleFieldRelativity);
+    pilotController.y().onTrue(toggleFieldRelativity);
     
   }
 /**Get the current autonomus command.
@@ -106,6 +131,6 @@ public class RobotContainer {
  * @return The current autonomus command.
  */
   public Command getAutonomousCommand() {
-    return Commands.print("No autonomous command configured");
+    return autoChooser.getSelected();
   }
 }
