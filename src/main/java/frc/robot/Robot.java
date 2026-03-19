@@ -6,6 +6,7 @@ package frc.robot;
 
 import java.nio.file.FileSystem;
 
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.net.WebServer;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -23,7 +24,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
-    WebServer.start(5800, Filesystem.getDeployDirectory().getPath());
+    //WebServer.start(5800, Filesystem.getDeployDirectory().getPath());
+    CameraServer.startAutomaticCapture();
   }
 
   @Override
