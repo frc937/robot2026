@@ -50,7 +50,7 @@ public final class Constants {
     public static final class DriveConstants {
 
         /** Swerve drive maximum speed. */
-        public static final double MAX_SPEED = Units.feetToMeters(9);
+        public static final double MAX_SPEED = Units.feetToMeters(12);
         
 
         /** Controller deadband */
