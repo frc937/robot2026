@@ -123,8 +123,9 @@ public class RobotContainer {
 
     pilotController.b().whileTrue(Commands.run(drivebase::lock, drivebase));
     
-    pilotController.y().onTrue(toggleFieldRelativity);
+    pilotController.x().onTrue(toggleFieldRelativity);
     SmartDashboard.putData("Toggle Field Relativity", toggleFieldRelativity);
+    SmartDashboard.putData("Zero Gyro", Commands.runOnce(drivebase::zeroGyro, drivebase));
     
   }
 /**Get the current autonomus command.
