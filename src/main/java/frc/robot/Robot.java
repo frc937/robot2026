@@ -26,6 +26,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     //WebServer.start(5800, Filesystem.getDeployDirectory().getPath());
     CameraServer.startAutomaticCapture();
+
   }
 
   @Override
@@ -59,6 +60,9 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+
+    CommandScheduler.getInstance().schedule(RobotContainer.drivebase.zeroGyroCommand());
+
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
