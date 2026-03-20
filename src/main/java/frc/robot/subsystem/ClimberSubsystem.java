@@ -8,6 +8,7 @@ import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ClimberConstants;
 
@@ -36,6 +37,7 @@ public class ClimberSubsystem extends SubsystemBase {
         ciabFollowerMotor.configure(ciabFollowerConfig, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
         SparkMaxConfig chainConfig = new SparkMaxConfig();
         chainConfig.idleMode(IdleMode.kBrake);
+        chainConfig.inverted(true);
         chainMotor.configure(chainConfig, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
     }
 
