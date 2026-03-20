@@ -39,7 +39,9 @@ public class DriveRobot extends Command {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+   if (fieldRelative) drivebase.zeroGyro();
+  }
 
 
   private double deadbandedAxis(double axis) {

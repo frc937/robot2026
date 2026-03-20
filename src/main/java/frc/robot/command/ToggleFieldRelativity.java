@@ -26,7 +26,6 @@ public class ToggleFieldRelativity extends Command {
   public void initialize() {
     if (drivebase.getDefaultCommand() == driveRobotOrientedCommand){
       drivebase.setDefaultCommand(driveFieldOrientedCommand);
-      drivebase.zeroGyro();
     } else {
       drivebase.setDefaultCommand(driveRobotOrientedCommand);
     }
