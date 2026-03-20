@@ -62,7 +62,7 @@ public final class Constants {
 
         /** speeds */
         public static final double CIAB_SPEED = 0.5; //IMPORTANT: UNTESTED VALUE
-        public static final double CHAIN_SPEED = 0.5; //IMPORTANT: UNTESTED VALUE
+        public static final double CHAIN_SPEED = 0.2; //IMPORTANT: UNTESTED VALUE
         
         /** motor CAN IDs */
         public static final int CIAB_1_MOTOR_PORT = 15; //placeholder value

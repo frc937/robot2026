@@ -18,7 +18,11 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.Controllers;
 import frc.robot.command.DriveRobot;
 import frc.robot.command.LowerCIAB;
+import frc.robot.command.LowerCIABTimed;
+import frc.robot.command.LowerChainClimber;
 import frc.robot.command.RaiseCIAB;
+import frc.robot.command.RaiseCIABTimed;
+import frc.robot.command.RaiseChainClimber;
 import frc.robot.command.ToggleFieldRelativity;
 import frc.robot.command.UpdateIsHubEnabled;
 import frc.robot.subsystem.ClimberSubsystem;
@@ -77,6 +81,10 @@ public class RobotContainer {
 
   public static RaiseCIAB raiseCIAB = new RaiseCIAB(climber);
   public static LowerCIAB lowerCIAB = new LowerCIAB(climber);
+  // public static RaiseCIABTimed raiseCIABTimed = new RaiseCIABTimed(climber);
+  // public static LowerCIABTimed lowerCIABTimed = new LowerCIABTimed(climber);
+  public static RaiseChainClimber raiseChain = new RaiseChainClimber(climber);
+  public static LowerChainClimber lowerChain = new LowerChainClimber(climber);
 
   /*
    * ***********************
@@ -91,7 +99,6 @@ public class RobotContainer {
 
     drivebase.setDefaultCommand(driveFieldOriented);
     SmartDashboard.putBoolean("Field Oriented", false);
-    CommandScheduler.getInstance().schedule(updateIsHubEnabled);
   }
 
   private void configureAuto() {
@@ -100,7 +107,7 @@ public class RobotContainer {
     /* Add auto options below vvvvvvvvv */
     autoChooser.addOption("Drive Forward 1 Second", drivebase.driveForward().withTimeout(1));
 
-    autoChooser.addOption("Raise Climbers for 1 Second", raiseCIAB.withTimeout(1));
+    //autoChooser.addOption("Raise Climbers for 1 Second", raiseCIAB.withTimeout(1));
 
     SmartDashboard.putData("Select Auto", autoChooser);
   }
@@ -116,8 +123,10 @@ public class RobotContainer {
     operatorController.axisLessThan(Axis.kLeftY.value, -0.5).whileTrue(new StartEndCommand(climber::reverseChainClimber, climber::stopChainClimber, climber));
 
     /**Test controls for sensor-based climber commands */
-    operatorController.x().onTrue(lowerCIAB);
-    operatorController.y().onTrue(raiseCIAB);
+    // operatorController.x().onTrue(lowerCIABTimed.andThen(lowerCIAB));
+    // operatorController.y().onTrue(raiseCIABTimed.andThen(raiseCIAB));
+    operatorController.leftBumper().onTrue(raiseChain);
+    operatorController.rightBumper().onTrue(lowerChain);
 
     operatorController.a().onTrue(drivebase.driveToDistanceCommand(2, 0.2));
 
