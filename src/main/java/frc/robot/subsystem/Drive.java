@@ -13,12 +13,8 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.trajectory.Trajectory;
-import edu.wpi.first.networktables.GenericEntry;
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Config;
@@ -26,13 +22,10 @@ import frc.robot.Constants.DriveConstants;
 
 import java.io.File;
 import java.util.Arrays;
-import java.util.function.DoubleSupplier;
-import java.util.function.Supplier;
 import swervelib.SwerveController;
 import swervelib.SwerveDrive;
 import swervelib.SwerveDriveTest;
 import swervelib.math.SwerveMath;
-import swervelib.parser.SwerveControllerConfiguration;
 import swervelib.parser.SwerveDriveConfiguration;
 import swervelib.parser.SwerveParser;
 import swervelib.telemetry.SwerveDriveTelemetry;
@@ -43,7 +36,9 @@ public class Drive extends SubsystemBase
   /**
    * Swerve drive object.
    */
-  private final SwerveDrive swerveDrive;  
+  private final SwerveDrive swerveDrive;
+
+  
 
   /**
    * Initialize {@link SwerveDrive} with the directory provided.
@@ -60,7 +55,7 @@ public class Drive extends SubsystemBase
                                                                       Meter.of(4)),
                                                     Rotation2d.fromDegrees(180));
     // Configure the Telemetry before creating the SwerveDrive to avoid unnecessary objects being created.
-    SwerveDriveTelemetry.verbosity = TelemetryVerbosity.HIGH; //TODO: REMOVE BEFORE COMP!!!!! (they dont like how much it muddies the network)
+    SwerveDriveTelemetry.verbosity = TelemetryVerbosity.LOW;
     try
     {
       swerveDrive = new SwerveParser(directory).createSwerveDrive(DriveConstants.MAX_SPEED, startingPose);
@@ -145,6 +140,11 @@ public class Drive extends SubsystemBase
     }).finallyDo(() -> swerveDrive.drive(new Translation2d(0, 0), 0, false, false));
   }
 
+  public Command driveToDistanceCommand(double distanceInMeters, double speedInMetersPerSecond) {
+    return run(() -> drive(new ChassisSpeeds(speedInMetersPerSecond, 0, 0)))
+        .until(() -> swerveDrive.getPose().getTranslation().getDistance(new Translation2d(0, 0)) >
+                     distanceInMeters);
+  }
 
   /**
    * Replaces the swerve module feedforward with a new SimpleMotorFeedforward object.
@@ -244,6 +244,10 @@ public class Drive extends SubsystemBase
   public void zeroGyro()
   {
     swerveDrive.zeroGyro();
+  }
+
+  public Command zeroGyroCommand() {
+    return runOnce(() -> swerveDrive.zeroGyro());
   }
 
   /**

@@ -9,12 +9,10 @@ import frc.robot.subsystem.Drive;
 
 /** Toggles field relativity for driving. */
 public class ToggleFieldRelativity extends Command {
-
-  private Drive drivebase;
-  private DriveRobot driveRobotOrientedCommand;
-  private DriveRobot driveFieldOrientedCommand;
-
-  /** Toggles field relativity for driving. */
+  private final Drive drivebase;
+  private final DriveRobot driveRobotOrientedCommand;
+  private final DriveRobot driveFieldOrientedCommand;
+  /** Creates a new ToggleFieldRelativity. */
   public ToggleFieldRelativity(Drive drivebase, DriveRobot driveROCommand, DriveRobot driveFOCommand) {
     this.drivebase = drivebase;
     this.driveRobotOrientedCommand = driveROCommand;
@@ -28,7 +26,6 @@ public class ToggleFieldRelativity extends Command {
   public void initialize() {
     if (drivebase.getDefaultCommand() == driveRobotOrientedCommand){
       drivebase.setDefaultCommand(driveFieldOrientedCommand);
-      drivebase.zeroGyro();
     } else {
       drivebase.setDefaultCommand(driveRobotOrientedCommand);
     }

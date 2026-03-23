@@ -47,14 +47,35 @@ public final class Constants {
     /** Constants that relate to the Drive subsystem. */
     public static final class DriveConstants {
 
-        /** Swerve drive maximum speed in feet. */
-        public static final double MAX_SPEED = Units.feetToMeters(7);
+        /** Swerve drive maximum speed. */
+        public static final double MAX_SPEED = Units.feetToMeters(12);
         
 
         /** Controller axis deadband */
         public static final double CONTROLLER_DEADBAND = 0.1;
     }
 
+    /** Constants for Climber mechanism */
+    public static final class ClimberConstants {
+
+        /** speeds */
+        public static final double CIAB_SPEED = 0.5; //IMPORTANT: UNTESTED VALUE
+        public static final double CHAIN_SPEED = 0.2; //IMPORTANT: UNTESTED VALUE
+        
+        /** motor CAN IDs */
+        public static final int CIAB_1_MOTOR_PORT = 15; //placeholder value
+        public static final int CIAB_2_MOTOR_PORT = 16; //placeholder value
+        public static final int CHAIN_MOTOR_PORT = 17; //placeholder value
+
+        /** IR distance thresholds */
+        public static final int TOWER_ALIGNMENT_DIST = 2000; //placeholder value, distance (mm) from IR to tower back wall
+        public static final int CLIMBING_ALIGNMENT_DIST = 100; //placeholder value, distance (mm) from IR to tower rung
+
+        /** Limit switch constants */
+        public static final int LIMIT_SWITCH_DIO_PORT = 0; //placeholder value. please wire such that limit switch triggered is true
+        public static final int CHAIN_UP_LIMIT_DIO_PORT = 1; //placeholder value
+        public static final int CHAIN_DOWN_LIMIT_DIO_PORT = 2; //placeholder value
+    }
     
 }
 
