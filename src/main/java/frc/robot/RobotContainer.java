@@ -24,7 +24,6 @@ import frc.robot.command.RaiseCIAB;
 import frc.robot.command.RaiseCIABTimed;
 import frc.robot.command.RaiseChainClimber;
 import frc.robot.command.ToggleFieldRelativity;
-import frc.robot.command.UpdateIsHubEnabled;
 import frc.robot.subsystem.ClimberSubsystem;
 import frc.robot.subsystem.Drive;
 import frc.robot.subsystem.Shooter;
@@ -75,9 +74,6 @@ public class RobotContainer {
     driveRobotOriented,
     driveFieldOriented);
   
-
-  /** singleton instance of {@link UpdateIsHubEnabled} command for the whole robot. */
-  public static UpdateIsHubEnabled updateIsHubEnabled = new UpdateIsHubEnabled();
 
   public static RaiseCIAB raiseCIAB = new RaiseCIAB(climber);
   public static LowerCIAB lowerCIAB = new LowerCIAB(climber);
