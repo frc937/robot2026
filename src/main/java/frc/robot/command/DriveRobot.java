@@ -54,9 +54,11 @@ public class DriveRobot extends Command {
     Translation2d translation = new Translation2d(
       -deadbandedAxis(drivingController.getLeftY()), 
       -deadbandedAxis(drivingController.getLeftX()));
-        
-    drivebase.drive(translation, -(deadbandedAxis(drivingController.getRightX()) * 2), fieldRelative);
-
+    
+      
+    double rotation = -(deadbandedAxis(drivingController.getRightX())) * 2;
+    drivebase.drive(translation, rotation, fieldRelative);
+    
     SmartDashboard.putBoolean("Field Oriented", fieldRelative);
   }
 

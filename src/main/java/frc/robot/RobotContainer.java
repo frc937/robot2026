@@ -27,8 +27,16 @@ import frc.robot.command.ToggleFieldRelativity;
 import frc.robot.subsystem.ClimberSubsystem;
 import frc.robot.subsystem.Drive;
 import frc.robot.subsystem.Shooter;
+
+
 /** Singleton class that contains all the robot's subsystems, commmands, and button bindings. */
 public class RobotContainer {
+
+  /*
+   * ***********************
+   * * OTHER INSTANCE VARS *
+   * ***********************
+   */
   
    /**Singleton instance of the Driver controller for the whole robot. */
   public static CommandXboxController pilotController = new CommandXboxController(Controllers.PILOT_CONTROLLER_PORT);
@@ -48,12 +56,14 @@ public class RobotContainer {
    */
 
 
-  /** SIngleton instance of the {@link Drive} for the whole robot. */
+  /** Singleton instance of the {@link Drive} for the whole robot. */
   public static Drive drivebase = new Drive(new File(Filesystem.getDeployDirectory(), "swerve"));
 
 
-   /** Singleton instance of the {@link Shooter} for the whole robot. */
-   public static Shooter shooter = new Shooter();
+  /** Singleton instance of the {@link Shooter} for the whole robot. */
+  public static Shooter shooter = new Shooter();
+
+
 
    public static ClimberSubsystem climber = new ClimberSubsystem();
 
@@ -63,12 +73,15 @@ public class RobotContainer {
    * ************
    */
 
-   /** singleton instance of the robot oriented {@link DriveRobot} command for the whole robot. */
+  /** Singleton instance of the robot oriented {@link DriveRobot} command for the whole robot. */
   public static DriveRobot driveRobotOriented = new DriveRobot(drivebase, pilotController, false);
 
-  /** singleton instance of the field oriented {@link DriveRobot} command for the whole robot. */
+  /** Singleton instance of the field oriented {@link DriveRobot} command for the whole robot. */
   public static DriveRobot driveFieldOriented = new DriveRobot(drivebase, pilotController, true);
 
+
+
+  /** Singleton instance of the field oriented {@link ToggleFieldRelativity} command for the whole robot */
   public static ToggleFieldRelativity toggleFieldRelativity = new ToggleFieldRelativity(
     drivebase, 
     driveRobotOriented,
@@ -82,13 +95,12 @@ public class RobotContainer {
   public static RaiseChainClimber raiseChain = new RaiseChainClimber(climber);
   public static LowerChainClimber lowerChain = new LowerChainClimber(climber);
 
-  /*
-   * ***********************
-   * * OTHER INSTANCE VARS *
-   * ***********************
-   */
 
 
+
+
+
+  /** Constructer for the {@link RobotContainer} */
   public RobotContainer() {
     configureBindings();
     configureAuto();
@@ -108,7 +120,9 @@ public class RobotContainer {
     SmartDashboard.putData("Select Auto", autoChooser);
   }
   
+
   private void configureBindings() {
+    /* Operator bindings. */
     operatorController.leftTrigger().whileTrue(Commands.run(shooter::runIntake, shooter).finallyDo(shooter::stop));
     operatorController.rightTrigger().whileTrue(Commands.run(shooter::runShooter, shooter).finallyDo(shooter::stop));
     operatorController.b().whileTrue(Commands.run(shooter::runIntakeReverse, shooter).finallyDo(shooter::stop));
@@ -126,6 +140,7 @@ public class RobotContainer {
 
     operatorController.a().onTrue(drivebase.driveToDistanceCommand(2, 0.2));
 
+    /* Pilot bindings. */
     pilotController.b().whileTrue(Commands.run(drivebase::lock, drivebase));
     
     pilotController.x().onTrue(toggleFieldRelativity);
@@ -133,10 +148,12 @@ public class RobotContainer {
     SmartDashboard.putData("Zero Gyro", Commands.runOnce(drivebase::zeroGyro, drivebase));
     
   }
-/**Get the current autonomus command.
- * 
- * @return The current autonomus command.
- */
+
+  /**
+  * Get the current autonomus command.
+  * 
+  * @return The current autonomus command.
+  */
   public Command getAutonomousCommand() {
     return autoChooser.getSelected();
   }
