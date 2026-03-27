@@ -6,6 +6,9 @@ package frc.robot;
 
 import java.io.File;
 
+import com.pathplanner.lib.auto.NamedCommands;
+
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.XboxController.Axis;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -102,12 +105,20 @@ public class RobotContainer {
 
   /** Constructer for the {@link RobotContainer} */
   public RobotContainer() {
+    DriverStation.silenceJoystickConnectionWarning(true);
+
     configureBindings();
     configureAuto();
 
     drivebase.setDefaultCommand(driveFieldOriented);
     SmartDashboard.putBoolean("Field Oriented", false);
+
+
+    /* Named Commands for use in Path Planner */
+    NamedCommands.registerCommand("RaiseCIAB", raiseCIAB);
   }
+
+
 
   private void configureAuto() {
     autoChooser.setDefaultOption("None", Commands.none());
