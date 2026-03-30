@@ -52,8 +52,8 @@ public class DriveRobot extends Command {
   public void execute() {
 
     Translation2d translation = new Translation2d(
-      -deadbandedAxis(drivingController.getLeftY()), 
-      -deadbandedAxis(drivingController.getLeftX()));
+      -deadbandedAxis(drivingController.getLeftY()) * 1.2, 
+      -deadbandedAxis(drivingController.getLeftX()) * 1.2);
     
       
     double rotation = -(deadbandedAxis(drivingController.getRightX())) * 2;
