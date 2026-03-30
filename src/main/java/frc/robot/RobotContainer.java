@@ -126,6 +126,8 @@ public class RobotContainer {
     /* Add auto options below vvvvvvvvv */
     autoChooser.addOption("Drive Forward 1 Second", drivebase.driveForward().withTimeout(1));
     autoChooser.addOption("test auto", drivebase.getAutonomousCommand("New Auto"));
+    autoChooser.addOption("Test 1", drivebase.getAutonomousCommand("Test 1"));
+    autoChooser.addOption("Test 2", drivebase.getAutonomousCommand("Test 2"));
 
     //autoChooser.addOption("Raise Climbers for 1 Second", raiseCIAB.withTimeout(1));
 

@@ -3,7 +3,7 @@
     "front": -9.1875,
     "left": 9.1875
   },
-  "absoluteEncoderOffset": 20,
+  "absoluteEncoderOffset": 20.7421875,
   "drive": {
     "type": "krakenx60",
     "id": 6,
