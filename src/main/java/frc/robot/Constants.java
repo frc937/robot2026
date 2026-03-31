@@ -53,6 +53,9 @@ public final class Constants {
 
         /** Controller axis deadband */
         public static final double CONTROLLER_DEADBAND = 0.1;
+
+        /** Controller input muliplication when sprinting */
+        public static final double SPRINT_SPEED_MULTIPLIER = 1.5;
     }
 
     /** Constants for Climber mechanism */

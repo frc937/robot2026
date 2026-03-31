@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.Controllers;
+import frc.robot.Constants.DriveConstants;
 import frc.robot.command.DriveRobot;
 import frc.robot.command.LowerCIAB;
 import frc.robot.command.LowerCIABTimed;
@@ -27,6 +28,7 @@ import frc.robot.command.RaiseCIAB;
 import frc.robot.command.RaiseCIABTimed;
 import frc.robot.command.RaiseChainClimber;
 import frc.robot.command.ToggleFieldRelativity;
+import frc.robot.command.ToggleSpeedMultiplier;
 import frc.robot.subsystem.ClimberSubsystem;
 import frc.robot.subsystem.Drive;
 import frc.robot.subsystem.Shooter;
@@ -49,6 +51,9 @@ public class RobotContainer {
   
 
   private SendableChooser<Command> autoChooser = new SendableChooser<>();
+
+  /** Singleton instance of the {@link ToggleSpeedMultiplier} for the whole robot. */
+  public static ToggleSpeedMultiplier toggleSpeedMultiplier = new ToggleSpeedMultiplier(DriveConstants.SPRINT_SPEED_MULTIPLIER);
 
 
 
@@ -158,6 +163,9 @@ public class RobotContainer {
     pilotController.b().whileTrue(Commands.run(drivebase::lock, drivebase));
     
     pilotController.x().onTrue(toggleFieldRelativity);
+
+    pilotController.rightTrigger().whileTrue(toggleSpeedMultiplier);
+
     SmartDashboard.putData("Toggle Field Relativity", toggleFieldRelativity);
     SmartDashboard.putData("Zero Gyro", Commands.runOnce(drivebase::zeroGyro, drivebase));
     
