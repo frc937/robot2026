@@ -53,7 +53,7 @@ public class RobotContainer {
   private SendableChooser<Command> autoChooser = new SendableChooser<>();
 
   /** Singleton instance of the {@link ToggleSpeedMultiplier} for the whole robot. */
-  public static ToggleSpeedMultiplier toggleSpeedMultiplier = new ToggleSpeedMultiplier(DriveConstants.SPRINT_SPEED_MULTIPLIER);
+  public static ToggleSpeedMultiplier toggleSpeedMultiplier = new ToggleSpeedMultiplier();
 
 
 

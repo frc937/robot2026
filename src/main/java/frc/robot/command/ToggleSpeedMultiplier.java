@@ -5,23 +5,22 @@
 package frc.robot.command;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants.DriveConstants;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class ToggleSpeedMultiplier extends Command {
 
-  private double sprintSpeed;
   private double currentSpeedMultiplier;
 
   /** Creates a new ToggleSpeedMultiplier. */
-  public ToggleSpeedMultiplier(double sprintSpeed) {
-    this.sprintSpeed = sprintSpeed;
+  public ToggleSpeedMultiplier() {
     currentSpeedMultiplier = 1.0;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    currentSpeedMultiplier = sprintSpeed;
+    currentSpeedMultiplier = DriveConstants.SPRINT_SPEED_MULTIPLIER;
   }
 
   /** Gets current drive speed muliplier */
