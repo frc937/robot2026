@@ -16,7 +16,8 @@ public class ClimberSubsystem extends SubsystemBase {
 
     private SparkMax ciabLeaderMotor = new SparkMax(ClimberConstants.CIAB_1_MOTOR_PORT, MotorType.kBrushed);
     private SparkMax ciabFollowerMotor = new SparkMax(ClimberConstants.CIAB_2_MOTOR_PORT, MotorType.kBrushed);
-    private SparkMax chainMotor = new SparkMax(ClimberConstants.CHAIN_MOTOR_PORT, MotorType.kBrushed);
+    private SparkMax chainLeaderMotor = new SparkMax(ClimberConstants.CHAIN_LEADER_PORT, MotorType.kBrushed);
+    private SparkMax chainFollowerMotor = new SparkMax(ClimberConstants.CHAIN_FOLLOWER_PORT, MotorType.kBrushed);
 
     private DigitalInput magLimitSwitch = new DigitalInput(ClimberConstants.LIMIT_SWITCH_DIO_PORT);
     private DigitalInput chainUpLimitSwitch = new DigitalInput(ClimberConstants.CHAIN_UP_LIMIT_DIO_PORT);
@@ -33,12 +34,18 @@ public class ClimberSubsystem extends SubsystemBase {
         ciabLeaderMotor.configure(ciabLeaderConfig, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
         SparkMaxConfig ciabFollowerConfig = new SparkMaxConfig();
         ciabFollowerConfig.apply(ciabLeaderConfig);
-        ciabFollowerConfig.follow(ciabLeaderMotor, false); //change invert to true if necessary
+        ciabFollowerConfig.follow(ciabLeaderMotor, false); //change invert to true if necessary 
         ciabFollowerMotor.configure(ciabFollowerConfig, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
-        SparkMaxConfig chainConfig = new SparkMaxConfig();
-        chainConfig.idleMode(IdleMode.kBrake);
-        chainConfig.inverted(true);
-        chainMotor.configure(chainConfig, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
+
+        SparkMaxConfig chainLeaderConfig = new SparkMaxConfig();
+        chainLeaderConfig.idleMode(IdleMode.kBrake);
+        chainLeaderConfig.inverted(true);
+        chainLeaderMotor.configure(chainLeaderConfig, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
+        SparkMaxConfig chainFollowerConfig = new SparkMaxConfig();
+        chainFollowerConfig.apply(chainLeaderConfig);
+        chainFollowerConfig.follow(chainLeaderMotor, true);
+        chainFollowerMotor.configure(chainFollowerConfig, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
+
     }
 
     /**Run climber-in-a-box motors at speed specified in {@link ClimberConstants}} */
@@ -56,7 +63,7 @@ public class ClimberSubsystem extends SubsystemBase {
 
     /**Run chain climber motor at speed specified in {@link ClimberConstants}} */
     public void runChainClimber() {
-        chainMotor.set(ClimberConstants.CHAIN_SPEED);
+        chainLeaderMotor.set(ClimberConstants.CHAIN_SPEED);
     }
 
     /**Run chain climber motor at provided speed
@@ -64,7 +71,7 @@ public class ClimberSubsystem extends SubsystemBase {
      * @param speed Motor speed between -1.0 and 1.0
      */
     public void runChainClimber(double speed) {
-        chainMotor.set(speed);
+        chainLeaderMotor.set(speed);
     }
 
     /**Run climber-in-a-box motors in reverse at speed specified in {@link ClimberConstants}} */
@@ -74,7 +81,7 @@ public class ClimberSubsystem extends SubsystemBase {
 
     /**Run chain climber motor in reverse at speed specified in {@link ClimberConstants} */
     public void reverseChainClimber() {
-        chainMotor.set(-ClimberConstants.CHAIN_SPEED);
+        chainLeaderMotor.set(-ClimberConstants.CHAIN_SPEED);
     }
 
     /**Stop the climber-in-a-box motors */
@@ -84,13 +91,13 @@ public class ClimberSubsystem extends SubsystemBase {
 
     /**Stop the chain climber motor */
     public void stopChainClimber() {
-        chainMotor.stopMotor();
+        chainLeaderMotor.stopMotor();
     }
 
     /**Stop all climber motors */
     public void stop() {
         ciabLeaderMotor.stopMotor();
-        chainMotor.stopMotor();
+        chainLeaderMotor.stopMotor();
     }
 
     /**Get the current reading of the magnetic limit switch.

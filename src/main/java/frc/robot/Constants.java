@@ -63,12 +63,13 @@ public final class Constants {
 
         /** speeds */
         public static final double CIAB_SPEED = 0.5; //IMPORTANT: UNTESTED VALUE
-        public static final double CHAIN_SPEED = 0.2; //IMPORTANT: UNTESTED VALUE
+        public static final double CHAIN_SPEED = 0.6; //IMPORTANT: UNTESTED VALUE
         
         /** motor CAN IDs */
         public static final int CIAB_1_MOTOR_PORT = 15; //placeholder value
         public static final int CIAB_2_MOTOR_PORT = 16; //placeholder value
-        public static final int CHAIN_MOTOR_PORT = 17; //placeholder value
+        public static final int CHAIN_LEADER_PORT = 17; //placeholder value
+        public static final int CHAIN_FOLLOWER_PORT = 18; //placeholder value
 
         /** IR distance thresholds */
         public static final int TOWER_ALIGNMENT_DIST = 2000; //placeholder value, distance (mm) from IR to tower back wall
