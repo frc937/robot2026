@@ -30,7 +30,7 @@
   "bumperOffsetY": 0.0,
   "robotFeatures": [
     "{\"name\":\"Shooter\",\"type\":\"rounded_rect\",\"data\":{\"center\":{\"x\":0.2,\"y\":0.0},\"size\":{\"width\":0.3,\"length\":0.2},\"borderRadius\":0.05,\"strokeWidth\":0.02,\"filled\":false}}",
-    "{\"name\":\"LCIAB\",\"type\":\"rounded_rect\",\"data\":{\"center\":{\"x\":0.15,\"y\":0.24},\"size\":{\"width\":0.1,\"length\":0.1},\"borderRadius\":0.0,\"strokeWidth\":0.02,\"filled\":false}}",
-    "{\"name\":\"Rectangle\",\"type\":\"rounded_rect\",\"data\":{\"center\":{\"x\":-0.15,\"y\":0.24},\"size\":{\"width\":0.1,\"length\":0.1},\"borderRadius\":0.0,\"strokeWidth\":0.02,\"filled\":false}}"
+    "{\"name\":\"LCIAB\",\"type\":\"rounded_rect\",\"data\":{\"center\":{\"x\":0.15,\"y\":0.24},\"size\":{\"width\":0.08,\"length\":0.08},\"borderRadius\":0.0,\"strokeWidth\":0.02,\"filled\":false}}",
+    "{\"name\":\"Rectangle\",\"type\":\"rounded_rect\",\"data\":{\"center\":{\"x\":-0.15,\"y\":0.24},\"size\":{\"width\":0.08,\"length\":0.08},\"borderRadius\":0.0,\"strokeWidth\":0.02,\"filled\":false}}"
   ]
 }

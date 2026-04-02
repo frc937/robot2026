@@ -29,6 +29,8 @@ import frc.robot.command.RaiseCIABTimed;
 import frc.robot.command.RaiseChainClimber;
 import frc.robot.command.ToggleFieldRelativity;
 import frc.robot.command.ToggleSpeedMultiplier;
+import frc.robot.command.CIABNoSwitch.LowerCIABNoSwitch;
+import frc.robot.command.CIABNoSwitch.RaiseCIABNoSwitch;
 import frc.robot.subsystem.ClimberSubsystem;
 import frc.robot.subsystem.Drive;
 import frc.robot.subsystem.Shooter;
@@ -103,6 +105,9 @@ public class RobotContainer {
   public static RaiseChainClimber raiseChain = new RaiseChainClimber(climber);
   public static LowerChainClimber lowerChain = new LowerChainClimber(climber);
 
+  public static LowerCIABNoSwitch lowerCIABNoSwitch = new LowerCIABNoSwitch(climber);
+  public static RaiseCIABNoSwitch raiseCIABNoSwitch = new RaiseCIABNoSwitch(climber);
+
 
 
 
@@ -112,6 +117,14 @@ public class RobotContainer {
   public RobotContainer() {
     DriverStation.silenceJoystickConnectionWarning(true);
 
+    /* Named Commands for use in Path Planner */
+    NamedCommands.registerCommand("RaiseCIAB", raiseCIAB);
+    NamedCommands.registerCommand("LowerCIAB", lowerCIAB);
+    NamedCommands.registerCommand("RaiseChain", raiseChain);
+    NamedCommands.registerCommand("LowerChain", lowerChain);
+    NamedCommands.registerCommand("RaiseCIABNoSwitch", raiseCIABNoSwitch);
+    NamedCommands.registerCommand("LowerCIABNoSwitch", lowerCIABNoSwitch);
+
     configureBindings();
     configureAuto();
 
@@ -119,8 +132,7 @@ public class RobotContainer {
     SmartDashboard.putBoolean("Field Oriented", false);
 
 
-    /* Named Commands for use in Path Planner */
-    NamedCommands.registerCommand("RaiseCIAB", raiseCIAB);
+    
   }
 
 
@@ -129,10 +141,10 @@ public class RobotContainer {
     autoChooser.setDefaultOption("None", Commands.none());
 
     /* Add auto options below vvvvvvvvv */
-    autoChooser.addOption("Drive Forward 1 Second", drivebase.driveForward().withTimeout(1));
-    autoChooser.addOption("test auto", drivebase.getAutonomousCommand("New Auto"));
-    autoChooser.addOption("Test 1", drivebase.getAutonomousCommand("Test 1"));
-    autoChooser.addOption("Test 2", drivebase.getAutonomousCommand("Test 2"));
+    // autoChooser.addOption("Drive Forward 1 Second", drivebase.driveForward().withTimeout(1));
+    autoChooser.addOption("CenterClimb", drivebase.getAutonomousCommand("Center S1 climb"));
+    autoChooser.addOption("LeftRampClimb", drivebase.getAutonomousCommand("Left ramp S1 climb"));
+    autoChooser.addOption("RightRampClimb", drivebase.getAutonomousCommand("Right ramp S1 climb"));
 
     //autoChooser.addOption("Raise Climbers for 1 Second", raiseCIAB.withTimeout(1));
 

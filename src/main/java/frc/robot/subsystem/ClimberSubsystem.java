@@ -31,6 +31,7 @@ public class ClimberSubsystem extends SubsystemBase {
          */
         SparkMaxConfig ciabLeaderConfig = new SparkMaxConfig();
         ciabLeaderConfig.idleMode(IdleMode.kBrake);
+        ciabLeaderConfig.inverted(true);
         ciabLeaderMotor.configure(ciabLeaderConfig, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
         SparkMaxConfig ciabFollowerConfig = new SparkMaxConfig();
         ciabFollowerConfig.apply(ciabLeaderConfig);
@@ -39,7 +40,7 @@ public class ClimberSubsystem extends SubsystemBase {
 
         SparkMaxConfig chainLeaderConfig = new SparkMaxConfig();
         chainLeaderConfig.idleMode(IdleMode.kBrake);
-        chainLeaderConfig.inverted(true);
+        chainLeaderConfig.inverted(false);
         chainLeaderMotor.configure(chainLeaderConfig, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
         SparkMaxConfig chainFollowerConfig = new SparkMaxConfig();
         chainFollowerConfig.apply(chainLeaderConfig);
