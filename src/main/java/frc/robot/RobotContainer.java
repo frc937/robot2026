@@ -21,16 +21,16 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.Controllers;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.command.DriveRobot;
-import frc.robot.command.LowerCIAB;
-import frc.robot.command.LowerCIABTimed;
-import frc.robot.command.LowerChainClimber;
-import frc.robot.command.RaiseCIAB;
-import frc.robot.command.RaiseCIABTimed;
-import frc.robot.command.RaiseChainClimber;
 import frc.robot.command.ToggleFieldRelativity;
 import frc.robot.command.ToggleSpeedMultiplier;
-import frc.robot.command.CIABNoSwitch.LowerCIABNoSwitch;
-import frc.robot.command.CIABNoSwitch.RaiseCIABNoSwitch;
+import frc.robot.command.climbers.CHAIN.LowerChainClimber;
+import frc.robot.command.climbers.CHAIN.RaiseChainClimber;
+import frc.robot.command.climbers.CIAB.LowerCIAB;
+import frc.robot.command.climbers.CIAB.LowerCIABTimed;
+import frc.robot.command.climbers.CIAB.RaiseCIAB;
+import frc.robot.command.climbers.CIAB.RaiseCIABTimed;
+import frc.robot.command.climbers.CIABNoSwitch.LowerCIABNoSwitch;
+import frc.robot.command.climbers.CIABNoSwitch.RaiseCIABNoSwitch;
 import frc.robot.subsystem.ClimberSubsystem;
 import frc.robot.subsystem.Drive;
 import frc.robot.subsystem.Shooter;
@@ -158,8 +158,8 @@ public class RobotContainer {
     operatorController.rightTrigger().whileTrue(Commands.run(shooter::runShooter, shooter).finallyDo(shooter::stop));
     operatorController.b().whileTrue(Commands.run(shooter::runIntakeReverse, shooter).finallyDo(shooter::stop));
     /**Climber controls. Change to whatever is best for drivers. */
-    operatorController.axisGreaterThan(Axis.kRightY.value, 0.5).whileTrue(new StartEndCommand(climber::runClimberInABox, climber::stopClimberInABox, climber));
-    operatorController.axisLessThan(Axis.kRightY.value, -0.5).whileTrue(new StartEndCommand(climber::reverseClimberInABox, climber::stopClimberInABox, climber));
+    operatorController.axisGreaterThan(Axis.kRightY.value, 0.5).whileTrue(new StartEndCommand(climber::reverseClimberInABox, climber::stopClimberInABox, climber));
+    operatorController.axisLessThan(Axis.kRightY.value, -0.5).whileTrue(new StartEndCommand(climber::runClimberInABox, climber::stopClimberInABox, climber));
     operatorController.axisGreaterThan(Axis.kLeftY.value, 0.5).whileTrue(new StartEndCommand(climber::runChainClimber, climber::stopChainClimber, climber));
     operatorController.axisLessThan(Axis.kLeftY.value, -0.5).whileTrue(new StartEndCommand(climber::reverseChainClimber, climber::stopChainClimber, climber));
 

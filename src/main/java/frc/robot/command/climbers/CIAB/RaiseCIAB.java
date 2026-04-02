@@ -1,29 +1,29 @@
-package frc.robot.command;
+package frc.robot.command.climbers.CIAB;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystem.ClimberSubsystem;
 
-public class LowerChainClimber extends Command {
-    
-    public ClimberSubsystem climber;
+public class RaiseCIAB extends Command {
 
-    public LowerChainClimber(ClimberSubsystem climber) {
+    private ClimberSubsystem climber;
+
+    public RaiseCIAB(ClimberSubsystem climber) {
         this.climber = climber;
         addRequirements(climber);
     }
 
     @Override
     public void initialize() {
-        climber.reverseChainClimber();
+        climber.runClimberInABox();
     }
 
     @Override
     public void end(boolean interrupted) {
-        climber.stopChainClimber();
+        climber.stopClimberInABox();
     }
 
     @Override
     public boolean isFinished() {
-        return climber.getChainDownLimitState();
+        return climber.getMagLimitState();
     }
 }
