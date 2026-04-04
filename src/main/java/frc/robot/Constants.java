@@ -48,14 +48,14 @@ public final class Constants {
     public static final class DriveConstants {
 
         /** Swerve drive maximum speed. */
-        public static final double MAX_SPEED = Units.feetToMeters(99);
+        public static final double MAX_SPEED = Units.feetToMeters(9.8);
         
 
         /** Controller axis deadband */
         public static final double CONTROLLER_DEADBAND = 0.1;
 
         /** Controller input muliplication when sprinting */
-        public static final double SPRINT_SPEED_MULTIPLIER = 1.5;
+        public static final double SPRINT_SPEED_MULTIPLIER = 1.7;
     }
 
     /** Constants for Climber mechanism */

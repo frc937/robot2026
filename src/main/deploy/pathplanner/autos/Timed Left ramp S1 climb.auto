@@ -5,25 +5,6 @@
     "data": {
       "commands": [
         {
-          "type": "race",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "RaiseCIABNoSwitch"
-                }
-              },
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 1.0
-                }
-              }
-            ]
-          }
-        },
-        {
           "type": "parallel",
           "data": {
             "commands": [
@@ -34,9 +15,22 @@
                 }
               },
               {
-                "type": "named",
+                "type": "race",
                 "data": {
-                  "name": "RaiseCIAB"
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "RaiseCIABNoSwitch"
+                      }
+                    },
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 1.6
+                      }
+                    }
+                  ]
                 }
               }
             ]
@@ -55,22 +49,16 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 1.0
+                  "waitTime": 10.0
                 }
               }
             ]
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "LowerCIAB"
           }
         }
       ]
     }
   },
   "resetOdom": true,
-  "folder": "Regular",
+  "folder": "Timed",
   "choreoAuto": false
 }

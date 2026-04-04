@@ -5,38 +5,32 @@
     "data": {
       "commands": [
         {
-          "type": "race",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "RaiseCIABNoSwitch"
-                }
-              },
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 1.0
-                }
-              }
-            ]
-          }
-        },
-        {
           "type": "parallel",
           "data": {
             "commands": [
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Left ramp to tower"
+                  "pathName": "Center to tower"
                 }
               },
               {
-                "type": "named",
+                "type": "race",
                 "data": {
-                  "name": "RaiseCIAB"
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "RaiseCIABNoSwitch"
+                      }
+                    },
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 1.6
+                      }
+                    }
+                  ]
                 }
               }
             ]
@@ -55,22 +49,16 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 1.0
+                  "waitTime": 12.0
                 }
               }
             ]
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "LowerCIAB"
           }
         }
       ]
     }
   },
   "resetOdom": true,
-  "folder": "Regular",
+  "folder": "Timed",
   "choreoAuto": false
 }

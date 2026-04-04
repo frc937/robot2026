@@ -142,9 +142,14 @@ public class RobotContainer {
 
     /* Add auto options below vvvvvvvvv */
     // autoChooser.addOption("Drive Forward 1 Second", drivebase.driveForward().withTimeout(1));
-    autoChooser.addOption("CenterClimb", drivebase.getAutonomousCommand("Center S1 climb"));
-    autoChooser.addOption("LeftRampClimb", drivebase.getAutonomousCommand("Left ramp S1 climb"));
-    autoChooser.addOption("RightRampClimb", drivebase.getAutonomousCommand("Right ramp S1 climb"));
+    autoChooser.addOption("SENSORCenterClimb", drivebase.getAutonomousCommand("Center S1 climb"));
+    autoChooser.addOption("SENSORLeftRampClimb", drivebase.getAutonomousCommand("Left ramp S1 climb"));
+    autoChooser.addOption("SENSORRightRampClimb", drivebase.getAutonomousCommand("Right ramp S1 climb"));
+
+    autoChooser.addOption("TIMEDCenterClimb", drivebase.getAutonomousCommand("Timed Center S1 climb"));
+    autoChooser.addOption("TIMEDLeftRampClimb", drivebase.getAutonomousCommand("Timed Left ramp S1 climb"));
+    autoChooser.addOption("TIMEDRightRampClimb", drivebase.getAutonomousCommand("Timed Right ramp S1 climb"));
+    //autoChooser.addOption("TIMEDClimb", drivebase.getAutonomousCommand("Timed S1 climb"));
 
     //autoChooser.addOption("Raise Climbers for 1 Second", raiseCIAB.withTimeout(1));
 
