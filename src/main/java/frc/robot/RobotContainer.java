@@ -6,6 +6,9 @@ package frc.robot;
 
 import java.io.File;
 
+import com.pathplanner.lib.auto.NamedCommands;
+
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.XboxController.Axis;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -16,14 +19,18 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.Controllers;
+import frc.robot.Constants.DriveConstants;
 import frc.robot.command.DriveRobot;
-import frc.robot.command.LowerCIAB;
-import frc.robot.command.LowerCIABTimed;
-import frc.robot.command.LowerChainClimber;
-import frc.robot.command.RaiseCIAB;
-import frc.robot.command.RaiseCIABTimed;
-import frc.robot.command.RaiseChainClimber;
 import frc.robot.command.ToggleFieldRelativity;
+import frc.robot.command.ToggleSpeedMultiplier;
+import frc.robot.command.climbers.CHAIN.LowerChainClimber;
+import frc.robot.command.climbers.CHAIN.RaiseChainClimber;
+import frc.robot.command.climbers.CIAB.LowerCIAB;
+import frc.robot.command.climbers.CIAB.LowerCIABTimed;
+import frc.robot.command.climbers.CIAB.RaiseCIAB;
+import frc.robot.command.climbers.CIAB.RaiseCIABTimed;
+import frc.robot.command.climbers.CIABNoSwitch.LowerCIABNoSwitch;
+import frc.robot.command.climbers.CIABNoSwitch.RaiseCIABNoSwitch;
 import frc.robot.subsystem.ClimberSubsystem;
 import frc.robot.subsystem.Drive;
 import frc.robot.subsystem.Shooter;
@@ -46,6 +53,9 @@ public class RobotContainer {
   
 
   private SendableChooser<Command> autoChooser = new SendableChooser<>();
+
+  /** Singleton instance of the {@link ToggleSpeedMultiplier} for the whole robot. */
+  public static ToggleSpeedMultiplier toggleSpeedMultiplier = new ToggleSpeedMultiplier();
 
 
 
@@ -95,6 +105,9 @@ public class RobotContainer {
   public static RaiseChainClimber raiseChain = new RaiseChainClimber(climber);
   public static LowerChainClimber lowerChain = new LowerChainClimber(climber);
 
+  public static LowerCIABNoSwitch lowerCIABNoSwitch = new LowerCIABNoSwitch(climber);
+  public static RaiseCIABNoSwitch raiseCIABNoSwitch = new RaiseCIABNoSwitch(climber);
+
 
 
 
@@ -102,18 +115,41 @@ public class RobotContainer {
 
   /** Constructer for the {@link RobotContainer} */
   public RobotContainer() {
+    DriverStation.silenceJoystickConnectionWarning(true);
+
+    /* Named Commands for use in Path Planner */
+    NamedCommands.registerCommand("RaiseCIAB", raiseCIAB);
+    NamedCommands.registerCommand("LowerCIAB", lowerCIAB);
+    NamedCommands.registerCommand("RaiseChain", raiseChain);
+    NamedCommands.registerCommand("LowerChain", lowerChain);
+    NamedCommands.registerCommand("RaiseCIABNoSwitch", raiseCIABNoSwitch);
+    NamedCommands.registerCommand("LowerCIABNoSwitch", lowerCIABNoSwitch);
+
     configureBindings();
     configureAuto();
 
     drivebase.setDefaultCommand(driveFieldOriented);
     SmartDashboard.putBoolean("Field Oriented", false);
+
+
+    
   }
+
+
 
   private void configureAuto() {
     autoChooser.setDefaultOption("None", Commands.none());
 
     /* Add auto options below vvvvvvvvv */
-    autoChooser.addOption("Drive Forward 1 Second", drivebase.driveForward().withTimeout(1));
+    // autoChooser.addOption("Drive Forward 1 Second", drivebase.driveForward().withTimeout(1));
+    autoChooser.addOption("SENSORCenterClimb", drivebase.getAutonomousCommand("Center S1 climb"));
+    autoChooser.addOption("SENSORLeftRampClimb", drivebase.getAutonomousCommand("Left ramp S1 climb"));
+    autoChooser.addOption("SENSORRightRampClimb", drivebase.getAutonomousCommand("Right ramp S1 climb"));
+
+    autoChooser.addOption("TIMEDCenterClimb", drivebase.getAutonomousCommand("Timed Center S1 climb"));
+    autoChooser.addOption("TIMEDLeftRampClimb", drivebase.getAutonomousCommand("Timed Left ramp S1 climb"));
+    autoChooser.addOption("TIMEDRightRampClimb", drivebase.getAutonomousCommand("Timed Right ramp S1 climb"));
+    //autoChooser.addOption("TIMEDClimb", drivebase.getAutonomousCommand("Timed S1 climb"));
 
     //autoChooser.addOption("Raise Climbers for 1 Second", raiseCIAB.withTimeout(1));
 
@@ -127,8 +163,8 @@ public class RobotContainer {
     operatorController.rightTrigger().whileTrue(Commands.run(shooter::runShooter, shooter).finallyDo(shooter::stop));
     operatorController.b().whileTrue(Commands.run(shooter::runIntakeReverse, shooter).finallyDo(shooter::stop));
     /**Climber controls. Change to whatever is best for drivers. */
-    operatorController.axisGreaterThan(Axis.kRightY.value, 0.5).whileTrue(new StartEndCommand(climber::runClimberInABox, climber::stopClimberInABox, climber));
-    operatorController.axisLessThan(Axis.kRightY.value, -0.5).whileTrue(new StartEndCommand(climber::reverseClimberInABox, climber::stopClimberInABox, climber));
+    operatorController.axisGreaterThan(Axis.kRightY.value, 0.5).whileTrue(new StartEndCommand(climber::reverseClimberInABox, climber::stopClimberInABox, climber));
+    operatorController.axisLessThan(Axis.kRightY.value, -0.5).whileTrue(new StartEndCommand(climber::runClimberInABox, climber::stopClimberInABox, climber));
     operatorController.axisGreaterThan(Axis.kLeftY.value, 0.5).whileTrue(new StartEndCommand(climber::runChainClimber, climber::stopChainClimber, climber));
     operatorController.axisLessThan(Axis.kLeftY.value, -0.5).whileTrue(new StartEndCommand(climber::reverseChainClimber, climber::stopChainClimber, climber));
 
@@ -144,6 +180,9 @@ public class RobotContainer {
     pilotController.b().whileTrue(Commands.run(drivebase::lock, drivebase));
     
     pilotController.x().onTrue(toggleFieldRelativity);
+
+    pilotController.rightTrigger().whileTrue(toggleSpeedMultiplier);
+
     SmartDashboard.putData("Toggle Field Relativity", toggleFieldRelativity);
     SmartDashboard.putData("Zero Gyro", Commands.runOnce(drivebase::zeroGyro, drivebase));
     

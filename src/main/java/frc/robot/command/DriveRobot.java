@@ -10,6 +10,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import frc.robot.RobotContainer;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.subsystem.Drive;
 
@@ -52,8 +53,8 @@ public class DriveRobot extends Command {
   public void execute() {
 
     Translation2d translation = new Translation2d(
-      -deadbandedAxis(drivingController.getLeftY()), 
-      -deadbandedAxis(drivingController.getLeftX()));
+      -deadbandedAxis(drivingController.getLeftY()) * RobotContainer.toggleSpeedMultiplier.getMultiplier(), 
+      -deadbandedAxis(drivingController.getLeftX()) * RobotContainer.toggleSpeedMultiplier.getMultiplier());
     
       
     double rotation = -(deadbandedAxis(drivingController.getRightX())) * 2;
